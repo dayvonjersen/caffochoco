@@ -1,10 +1,6 @@
-var App = (function(A){
+var App = ((App) => {
 
-    /**
-     * dox
-     */
-    A.newFeature = function() {
-    };
+    App.newFeature = () => {};
 
-    return A;
-}(App || {}));
+    return App;
+})(App || {});
