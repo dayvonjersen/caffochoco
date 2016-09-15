@@ -12,6 +12,29 @@ var API = (function(API){
 }(API || {}));
 var App = ((App) => {
 
+
+    App.ajaxify = () => {
+        [].forEach.call(
+            document.querySelectorAll("a[data-ajax]"), 
+            (anchorElement) => {
+                anchorElement.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    history.pushState(
+                        {"state":"state"},
+                        "title",
+                        anchorElement.pathname
+                    );
+                    App.router(anchorElement.pathname);
+                });
+                anchorElement.removeAttribute("data-ajax");
+            }
+        );
+    };
+
+    return App;
+})(App || {});
+var App = ((App) => {
+
     /**
      *
      */
@@ -21,14 +44,20 @@ var App = ((App) => {
                 template: "index",
                 endpoint: "/",
             },
+            "/test": {
+                template: "release",
+                endpoint: "/",
+            },
         };
         window.addEventListener("load", () => {
             API.fetchJSON("/", (data) => {
                 // add routes to releases...
-                window.dispatchEvent(new Event("hashchange"));
+                App.router(location.pathname);
             });
             
-            window.addEventListener("hashchange", App.router);
+            window.addEventListener("popstate", () => {
+                App.router(location.pathname);
+            });
         });
     };
 
@@ -36,9 +65,9 @@ var App = ((App) => {
 })(App || {});
 var App = ((App) => {
 
-    App.router = () => {
-        if(location.pathname in App.routes) {
-            var r = App.routes[location.pathname];
+    App.router = (pathname) => {
+        if(pathname in App.routes) {
+            var r = App.routes[pathname];
             API.fetchJSON(r.endpoint, (data) => {
                 View.render(r.template, data);
             });
@@ -52,7 +81,7 @@ var App = ((App) => {
 var View = ((View) => {
 
     View.index = (data) => {
-        return `<h1>hello ${data.hello}</h1>`;
+        return `<h1>hello ${data.hello}</h1><a href="/test" data-ajax>test</a>`;
     };
 
     return View;
@@ -72,9 +101,10 @@ var View = ((View) => {
         if(template in View) {
             html = View[template](data);
         } else {
-            html =`Missing template "${template}"`;
+            html = `Missing template "${template}"`;
         }
         document.body.innerHTML = html;
+        App.ajaxify();
     };
 
     return View;

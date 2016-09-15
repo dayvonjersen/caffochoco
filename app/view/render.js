@@ -8,6 +8,7 @@ var View = ((View) => {
             html = `Missing template "${template}"`;
         }
         document.body.innerHTML = html;
+        App.ajaxify();
     };
 
     return View;

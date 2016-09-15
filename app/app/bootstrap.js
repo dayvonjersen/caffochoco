@@ -9,14 +9,20 @@ var App = ((App) => {
                 template: "index",
                 endpoint: "/",
             },
+            "/test": {
+                template: "release",
+                endpoint: "/",
+            },
         };
         window.addEventListener("load", () => {
             API.fetchJSON("/", (data) => {
                 // add routes to releases...
-                window.dispatchEvent(new Event("hashchange"));
+                App.router(location.pathname);
             });
             
-            window.addEventListener("hashchange", App.router);
+            window.addEventListener("popstate", () => {
+                App.router(location.pathname);
+            });
         });
     };
 

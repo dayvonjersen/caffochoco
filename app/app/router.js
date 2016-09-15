@@ -1,8 +1,8 @@
 var App = ((App) => {
 
-    App.router = () => {
-        if(location.pathname in App.routes) {
-            var r = App.routes[location.pathname];
+    App.router = (pathname) => {
+        if(pathname in App.routes) {
+            var r = App.routes[pathname];
             API.fetchJSON(r.endpoint, (data) => {
                 View.render(r.template, data);
             });
