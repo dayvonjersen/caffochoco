@@ -16,8 +16,15 @@ var App = ((App) => {
      *
      */
     App.bootstrap = () => {
+        App.routes = {
+            "/": {
+                template: "index",
+                endpoint: "/",
+            },
+        };
         window.addEventListener("load", () => {
-            API.fetchJSON("/", (indexData) => {
+            API.fetchJSON("/", (data) => {
+                // add routes to releases...
                 window.dispatchEvent(new Event("hashchange"));
             });
             
@@ -30,22 +37,46 @@ var App = ((App) => {
 var App = ((App) => {
 
     App.router = () => {
-        [].forEach.call(document.querySelectorAll(".page"), (el) => el.classList.remove("visible"));
-
-        var page;
-        switch(decodeURI(window.location.hash).split("/")[1]) {
-        case undefined: 
-        case '':             
-            page = 'all-tracks';
-            document.querySelector("."+page).innerHTML = `<h1>hello world</h1>`;
-            break;
-        case 'single-track': page = 'single-track'; break;
-        default:             page = 'error'; break;
+        if(location.pathname in App.routes) {
+            var r = App.routes[location.pathname];
+            API.fetchJSON(r.endpoint, (data) => {
+                View.render(r.template, data);
+            });
+        } else {
+            View.render("notfound");
         }
-
-        document.querySelector("."+page).classList.add("visible");
     };
 
     return App;
 })(App || {});
+var View = ((View) => {
+
+    View.index = (data) => {
+        return `<h1>hello ${data.hello}</h1>`;
+    };
+
+    return View;
+})(View || {});
+var View = ((View) => {
+
+    View.release = (data) => {
+        return `<h1>release</h1>`;
+    };
+
+    return View;
+})(View || {});
+var View = ((View) => {
+
+    View.render = (template, data) => {
+        let html;
+        if(template in View) {
+            html = View[template](data);
+        } else {
+            html =`Missing template "${template}"`;
+        }
+        document.body.innerHTML = html;
+    };
+
+    return View;
+})(View || {});
 App.bootstrap();

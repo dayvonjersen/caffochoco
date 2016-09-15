@@ -4,8 +4,15 @@ var App = ((App) => {
      *
      */
     App.bootstrap = () => {
+        App.routes = {
+            "/": {
+                template: "index",
+                endpoint: "/",
+            },
+        };
         window.addEventListener("load", () => {
-            API.fetchJSON("/", (indexData) => {
+            API.fetchJSON("/", (data) => {
+                // add routes to releases...
                 window.dispatchEvent(new Event("hashchange"));
             });
             

@@ -1,20 +1,14 @@
 var App = ((App) => {
 
     App.router = () => {
-        [].forEach.call(document.querySelectorAll(".page"), (el) => el.classList.remove("visible"));
-
-        var page;
-        switch(decodeURI(window.location.hash).split("/")[1]) {
-        case undefined: 
-        case '':             
-            page = 'all-tracks';
-            document.querySelector("."+page).innerHTML = `<h1>hello world</h1>`;
-            break;
-        case 'single-track': page = 'single-track'; break;
-        default:             page = 'error'; break;
+        if(location.pathname in App.routes) {
+            var r = App.routes[location.pathname];
+            API.fetchJSON(r.endpoint, (data) => {
+                View.render(r.template, data);
+            });
+        } else {
+            View.render("notfound");
         }
-
-        document.querySelector("."+page).classList.add("visible");
     };
 
     return App;
