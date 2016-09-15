@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"strings"
 
@@ -13,7 +14,14 @@ func apiHandler(ctx *fasthttp.RequestCtx) {
 	ctx.Response.Header.Set("Content-Type", "application/json")
 	switch path {
 	case "/":
-		fmt.Fprintf(ctx, `{"hello":"world"}`)
+		stuff := map[string]interface{}{
+			"releases": fetchAll(`SELECT * FROM releases`),
+			"sections": fetchAll(`SELECT * FROM sections`),
+		}
+
+		b, err := json.Marshal(stuff)
+		checkErr(err)
+		fmt.Fprintf(ctx, string(b))
 	default:
 		ctx.Response.SetStatusCode(404)
 		fmt.Fprintf(ctx, `{"error":"404"}`)

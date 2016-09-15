@@ -1,11 +1,13 @@
 package main
 
 import (
+	"database/sql"
 	"flag"
 	"fmt"
 	"log"
 	"strings"
 
+	_ "github.com/go-sql-driver/mysql"
 	"github.com/valyala/fasthttp"
 )
 
@@ -14,6 +16,7 @@ const (
 )
 
 var (
+	db            *sql.DB
 	staticHandler = fasthttp.FSHandler(STATIC_DIR, 0)
 )
 
@@ -59,6 +62,11 @@ func main() {
 		"",
 	)
 	flag.Parse()
+
+	var err error
+	db, err = sql.Open("mysql", "root@/caffochoco")
+	checkErr(err)
+	defer db.Close()
 
 	listenAddr := fmt.Sprintf("%s:%d", addr, port)
 	log.Println("listening on", listenAddr)
