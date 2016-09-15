@@ -1,3 +1,5 @@
 caffochoco
 *.fasthttp.gz
 cmd/watch/watch
+*.jpg
+*.png

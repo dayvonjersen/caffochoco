@@ -12,13 +12,19 @@ import (
 )
 
 const (
-	STATIC_DIR string = "./public"
+	STATIC_DIR = "./public"
+	IMAGE_DIR  = "./image"
 )
 
 var (
 	db            *sql.DB
 	staticHandler = fasthttp.FSHandler(STATIC_DIR, 0)
 )
+
+func notfoundHandler(ctx *fasthttp.RequestCtx) {
+	ctx.Response.SetStatusCode(404)
+	fmt.Fprintf(ctx, "file not found")
+}
 
 func requestHandler(ctx *fasthttp.RequestCtx) {
 	defer func() {
@@ -36,7 +42,8 @@ func requestHandler(ctx *fasthttp.RequestCtx) {
 		fasthttp.ServeFile(ctx, "./index.html")
 	case strings.HasPrefix(path, "/api/"):
 		apiHandler(ctx)
-	// imageHandler
+	case strings.HasPrefix(path, "/image/"):
+		imageHandler(ctx)
 	// audioHandler
 	case fileExists(STATIC_DIR + path):
 		staticHandler(ctx)
