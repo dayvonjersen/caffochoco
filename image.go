@@ -31,7 +31,7 @@ func imageHandler(ctx *fasthttp.RequestCtx) {
 		checkErr(err)
 		ctx.Response.Header.Set("Content-Type", "text/css")
 		for _, swatch := range palette.ExtractAwesome() {
-			fmt.Fprintf(ctx, swatch.String())
+			fmt.Fprintln(ctx, swatch.String())
 		}
 	} else {
 		imageFSHandler(ctx)
