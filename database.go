@@ -1,8 +1,6 @@
 package main
 
-import "fmt"
-
-func fetchAll(query string) (results []map[string]string) {
+func fetchAll(query string) (results []map[string]interface{}) {
 	rows, err := db.Query(query)
 	checkErr(err)
 	cols, err := rows.Columns()
@@ -14,9 +12,9 @@ func fetchAll(query string) (results []map[string]string) {
 			vars[i] = &v
 		}
 		checkErr(rows.Scan(vars...))
-		res := map[string]string{}
+		res := map[string]interface{}{}
 		for idx, col := range cols {
-			res[col] = fmt.Sprintf("%s", *vars[idx].(*string))
+			res[col] = vars[idx]
 		}
 		results = append(results, res)
 	}
