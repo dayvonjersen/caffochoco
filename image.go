@@ -12,7 +12,7 @@ import (
 	"github.com/valyala/fasthttp"
 )
 
-var imageFSHandler = fasthttp.FSHandler(".", 0)
+var imageFSHandler = fasthttp.FSHandler(IMAGE_DIR, 1)
 
 func imageHandler(ctx *fasthttp.RequestCtx) {
 	path := "." + string(ctx.Path())
