@@ -44,6 +44,8 @@ func requestHandler(ctx *fasthttp.RequestCtx) {
 		apiHandler(ctx)
 	case strings.HasPrefix(path, "/image/"):
 		imageHandler(ctx)
+	case strings.HasPrefix(path, "/blog/"):
+		blogHandler(ctx)
 	// audioHandler
 	case fileExists(STATIC_DIR + path):
 		staticHandler(ctx)
