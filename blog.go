@@ -4,6 +4,8 @@ import (
 	"bytes"
 	"fmt"
 	"io/ioutil"
+	"os"
+	"path/filepath"
 	"regexp"
 	"strconv"
 	"strings"
@@ -11,6 +13,7 @@ import (
 	"time"
 
 	"github.com/russross/blackfriday"
+	"github.com/shibukawa/git4go"
 	"github.com/valyala/fasthttp"
 )
 
@@ -26,21 +29,94 @@ const (
 		<address>~ uguu</address>
 	</body>
 </html>`
+	BLOG_TOC = `{{range .}} 
+	
+	<a href="{{.Url}}">{{.Title}}</a>
+	<time>{{.Date}}</time>
+
+	<hr>
+	
+	{{end}}`
 )
 
+// grab git HEAD commit hash + precompile table of contents
+// cache compiled blog posts map[string]string{"/path/to/blog.md": "<html>..."}
+// invalidate cache on HEAD commit change, 20 GOTO 10
+
+func getLastCommit() string {
+	repo, err := git4go.OpenRepository(BLOG_DIR)
+	checkErr(err)
+	head, err := repo.Head()
+	checkErr(err)
+	return head.Target().String()
+}
+
+var lastCommit string
+var blogCache map[string]string
+
+func validateCache() {
+	commit := getLastCommit()
+	if commit != lastCommit {
+		blogCache = map[string]string{}
+		lastCommit = commit
+	}
+}
+
+func getBlog(path string) string {
+	validateCache()
+	if blog, ok := blogCache[path]; ok {
+		return blog
+	}
+	blogBytes, err := ioutil.ReadFile(path)
+	checkErr(err)
+	t := template.Must(template.New("blog").Parse(BLOG_TPL))
+	buf := new(bytes.Buffer)
+	err = t.Execute(buf, parseBlog(blogBytes))
+	checkErr(err)
+	blog := buf.String()
+	blogCache[path] = blog
+	return blog
+}
+
+func getToc() string {
+	validateCache()
+	if toc, ok := blogCache[""]; ok {
+		return toc
+	}
+	data := []*blogPost{}
+	filepath.Walk(BLOG_DIR, func(path string, info os.FileInfo, err error) error {
+		if !info.IsDir() && strings.HasSuffix(info.Name(), ".md") {
+			blogBytes, err := ioutil.ReadFile(path)
+			checkErr(err)
+			blogPost, _ := parseMetadata(blogBytes)
+			blogPost.Url = strings.TrimSuffix(strings.TrimPrefix(info.Name(), BLOG_DIR), ".md")
+			data = append(data, blogPost)
+		}
+		return nil
+	})
+	t := template.Must(template.New("toc").Parse(BLOG_TOC))
+	buf := new(bytes.Buffer)
+	err := t.Execute(buf, data)
+	checkErr(err)
+	toc := buf.String()
+	blogCache[""] = toc
+	return toc
+}
+
 func blogHandler(ctx *fasthttp.RequestCtx) {
+	fmt.Println(getLastCommit())
 	ctx.Response.Header.Set("Content-Type", "text/html")
 	path := strings.TrimPrefix(string(ctx.Path()), "/blog/")
+	if path == "" {
+		fmt.Fprint(ctx, getToc())
+		return
+	}
 	path = BLOG_DIR + path + ".md"
 	if !fileExists(path) {
 		notfoundHandler(ctx)
 		return
 	}
-	blogBytes, err := ioutil.ReadFile(path)
-	checkErr(err)
-	t := template.Must(template.New("blog").Parse(BLOG_TPL))
-	err = t.Execute(ctx, parseBlog(blogBytes))
-	checkErr(err)
+	fmt.Fprint(ctx, getBlog(path))
 }
 
 var re = *regexp.MustCompile(`(?i)(title|date|intro|tags|status|toc|position):(.+)`)
@@ -54,9 +130,10 @@ type blogPost struct {
 	Toc      bool
 	Position int
 	Blog     string
+	Url      string
 }
 
-func parseBlog(blogBytes []byte) *blogPost {
+func parseMetadata(blogBytes []byte) (*blogPost, []byte) {
 	ret := &blogPost{}
 	buf := bytes.NewBuffer(blogBytes)
 	for {
@@ -94,8 +171,11 @@ func parseBlog(blogBytes []byte) *blogPost {
 			ret.Position, _ = strconv.Atoi(value)
 		}
 	}
-	unsafe := blackfriday.MarkdownCommon(buf.Bytes())
+	return ret, buf.Bytes()
+}
+func parseBlog(blogBytes []byte) *blogPost {
+	ret, blog := parseMetadata(blogBytes)
+	unsafe := blackfriday.MarkdownCommon(blog)
 	ret.Blog = string(unsafe)
-	fmt.Printf("%#v\n", ret)
 	return ret
 }
