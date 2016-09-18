@@ -31,7 +31,8 @@ const (
 </html>`
 	BLOG_TOC = `{{range .}} 
 	
-	<a href="{{.Url}}">{{.Title}}</a>
+	<a href="/blog/{{.Url}}">{{.Title}}</a>
+	<p>{{range .Tags}} {{.}} {{end}}</p>
 	<time>{{.Date}}</time>
 
 	<hr>
@@ -104,7 +105,6 @@ func getToc() string {
 }
 
 func blogHandler(ctx *fasthttp.RequestCtx) {
-	fmt.Println(getLastCommit())
 	ctx.Response.Header.Set("Content-Type", "text/html")
 	path := strings.TrimPrefix(string(ctx.Path()), "/blog/")
 	if path == "" {

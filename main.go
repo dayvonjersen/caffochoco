@@ -26,6 +26,23 @@ func notfoundHandler(ctx *fasthttp.RequestCtx) {
 	fmt.Fprintf(ctx, "file not found")
 }
 
+var routes = map[string]fasthttp.RequestHandler{
+	"/api/":   apiHandler,
+	"/image/": imageHandler,
+	"/blog/":  blogHandler,
+	// audioHandler
+}
+
+func router(path string, ctx *fasthttp.RequestCtx) bool {
+	for route, handler := range routes {
+		if strings.HasPrefix(path, route) {
+			handler(ctx)
+			return true
+		}
+	}
+	return false
+}
+
 func requestHandler(ctx *fasthttp.RequestCtx) {
 	defer func() {
 		log.Println("->", string(ctx.Method()), string(ctx.Path()))
@@ -40,17 +57,11 @@ func requestHandler(ctx *fasthttp.RequestCtx) {
 		fallthrough
 	default:
 		fasthttp.ServeFile(ctx, "./index.html")
-	case strings.HasPrefix(path, "/api/"):
-		apiHandler(ctx)
-	case strings.HasPrefix(path, "/image/"):
-		imageHandler(ctx)
-	case strings.HasPrefix(path, "/blog/"):
-		blogHandler(ctx)
-	// audioHandler
+	case router(path, ctx):
 	case fileExists(STATIC_DIR + path):
 		staticHandler(ctx)
-	}
 
+	}
 }
 
 func main() {
