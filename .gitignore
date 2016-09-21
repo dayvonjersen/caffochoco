@@ -3,3 +3,4 @@ caffochoco
 cmd/watch/watch
 *.jpg
 *.png
+node_modules/
