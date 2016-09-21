@@ -1,14 +1,19 @@
 package main
 
 import (
+	"bytes"
 	"database/sql"
 	"flag"
 	"fmt"
+	"io/ioutil"
 	"log"
 	"os"
+	"runtime/debug"
 	"strings"
+	"text/template"
 
 	_ "github.com/go-sql-driver/mysql"
+	pp "github.com/maruel/panicparse/stack"
 	"github.com/valyala/fasthttp"
 )
 
@@ -44,11 +49,38 @@ func router(path string, ctx *fasthttp.RequestCtx) bool {
 	return false
 }
 
+func getStack(stack []byte) string {
+	in := bytes.NewBuffer(stack)
+	trace, err := pp.ParseDump(in, ioutil.Discard)
+	checkErr(err)
+	p := &pp.Palette{}
+	buckets := pp.SortBuckets(pp.Bucketize(trace, pp.AnyValue))
+	src, pkg := pp.CalcLengths(buckets, false)
+	ret := ""
+	for _, bucket := range buckets {
+		ret += p.StackLines(&bucket.Signature, src, pkg, false)
+	}
+	return ret
+}
+
 func requestHandler(ctx *fasthttp.RequestCtx) {
 	defer func() {
 		log.Println("->", string(ctx.Method()), string(ctx.Path()))
 		s := ctx.Response.StatusCode()
 		log.Println("<-", s, fasthttp.StatusMessage(s))
+	}()
+	defer func() {
+		if x := recover(); x != nil {
+			t, err := template.ParseFiles("./templates/error_500.html")
+			checkErr(err)
+			buf := new(bytes.Buffer)
+			checkErr(t.Execute(buf, struct {
+				Message, Stack string
+			}{x.(string), getStack(debug.Stack())}))
+			ctx.SetStatusCode(500)
+			fmt.Fprintf(ctx, buf.String())
+			// log.Printf("runtime panic: %v\n", x)
+		}
 	}()
 
 	path := string(ctx.Path())

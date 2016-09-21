@@ -37,7 +37,7 @@ func apiHandler(ctx *fasthttp.RequestCtx) {
 		ret = map[string]interface{}{"error": 404}
 	}
 
-	b, err := json.Marshal(ret)
+	b, err := json.MarshalIndent(ret, "", "    ")
 	checkErr(err)
 	fmt.Fprintf(ctx, string(b))
 }
