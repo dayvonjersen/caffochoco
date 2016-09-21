@@ -19,25 +19,8 @@ import (
 
 const (
 	BLOG_DIR = "/home/tso/blog/"
-	BLOG_TPL = `<!doctype html>
-<html>
-	<body>
-		<h1>{{.Title}}</h1>
-		<h2>{{.Date}}</h2>
-		{{.Blog}}
-		<hr>
-		<address>~ uguu</address>
-	</body>
-</html>`
-	BLOG_TOC = `{{range .}} 
-	
-	<a href="/blog/{{.Url}}">{{.Title}}</a>
-	<p>{{range .Tags}} {{.}} {{end}}</p>
-	<time>{{.Date}}</time>
-
-	<hr>
-	
-	{{end}}`
+	BLOG_TPL = "./templates/blog_entry.html"
+	BLOG_TOC = "./templates/blog_index.html"
 )
 
 // grab git HEAD commit hash + precompile table of contents
@@ -70,10 +53,10 @@ func getBlog(path string) string {
 	}
 	blogBytes, err := ioutil.ReadFile(path)
 	checkErr(err)
-	t := template.Must(template.New("blog").Parse(BLOG_TPL))
-	buf := new(bytes.Buffer)
-	err = t.Execute(buf, parseBlog(blogBytes))
+	t, err := template.ParseFiles(BLOG_TPL)
 	checkErr(err)
+	buf := new(bytes.Buffer)
+	checkErr(t.Execute(buf, parseBlog(blogBytes)))
 	blog := buf.String()
 	blogCache[path] = blog
 	return blog
@@ -95,10 +78,10 @@ func getToc() string {
 		}
 		return nil
 	})
-	t := template.Must(template.New("toc").Parse(BLOG_TOC))
-	buf := new(bytes.Buffer)
-	err := t.Execute(buf, data)
+	t, err := template.ParseFiles(BLOG_TOC)
 	checkErr(err)
+	buf := new(bytes.Buffer)
+	checkErr(t.Execute(buf, data))
 	toc := buf.String()
 	blogCache[""] = toc
 	return toc

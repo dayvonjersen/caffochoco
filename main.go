@@ -5,6 +5,7 @@ import (
 	"flag"
 	"fmt"
 	"log"
+	"os"
 	"strings"
 
 	_ "github.com/go-sql-driver/mysql"
@@ -56,7 +57,7 @@ func requestHandler(ctx *fasthttp.RequestCtx) {
 	case path == "/", path == "/index.html":
 		fallthrough
 	default:
-		fasthttp.ServeFile(ctx, "./index.html")
+		fasthttp.ServeFile(ctx, "./templates/index.html")
 	case router(path, ctx):
 	case fileExists(STATIC_DIR + path):
 		staticHandler(ctx)
@@ -91,4 +92,20 @@ func main() {
 	listenAddr := fmt.Sprintf("%s:%d", addr, port)
 	log.Println("listening on", listenAddr)
 	log.Fatalln(fasthttp.ListenAndServe(listenAddr, requestHandler))
+}
+
+func checkErr(err error) {
+	if err != nil {
+		log.Panicln(err)
+	}
+}
+
+func fileExists(filename string) bool {
+	f, err := os.Open(filename)
+	f.Close()
+	if os.IsNotExist(err) {
+		return false
+	}
+	checkErr(err)
+	return true
 }
