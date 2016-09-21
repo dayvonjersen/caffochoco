@@ -4,7 +4,7 @@ const process = require('process');
 const htmlparser2 = require('htmlparser2');
 const nodeSass = require('node-sass');
 
-let snake2PascalCase = (txt) => {return s="",txt.split('-').forEach((t)=>s+=t[0].toUpperCase()+t.substr(1)),s}
+let kebabￚcase2PascalCase = (txt) => {return s="",txt.split('-').forEach((t)=>s+=t[0].toUpperCase()+t.substr(1)),s}
 
 function Devour(htmlfile) {
 
@@ -25,7 +25,7 @@ let Parser = new htmlparser2.Parser(
             switch(name) {
             case "element":
                 if(! ("name" in attr))  throw new Error("Missing ``name'' attribute for <element>");
-                element.name = snake2PascalCase(attr.name);
+                element.name = kebabￚcase2PascalCase(attr.name);
                 element.tag = attr.name;
             case "style":
             case "template":
@@ -82,6 +82,23 @@ Register("${element.name}", "${element.tag}", Z, "${element.template}");
 }
 };
 
+// console.log(module.paths);
+let staticFiles = [
+    "webcomponents.js/CustomElements.min.js",
+    "../hecomes.js",
+];
+let staticBuffers = [];
+staticFiles.forEach((file, idx) => {
+    module.paths.forEach((dir) => {
+        if(staticBuffers.length > idx)  return;
+        try {
+            fs.statSync(dir + path.sep + file);
+            staticBuffers.push(fs.readFileSync(dir + path.sep + file));
+        } catch(e) {}
+    });
+    if(staticBuffers.length <= idx)  throw new Error(file, "not found in module.paths");
+});
+
 function Bundle(elements, jsFile = "build/build.js", cssFile = "build/build.css") {
     let js = "";
     let css = "";
@@ -90,15 +107,9 @@ function Bundle(elements, jsFile = "build/build.js", cssFile = "build/build.css"
         css += element.css;
     });
 
-    let cwd = `./${ path.basename(process.cwd()) != "zalgo.js" ? "zalgo.js/" : "" }`;
-    
-    fs.writeFileSync(jsFile, 
-        Buffer.concat([
-            fs.readFileSync(cwd+"node_modules/webcomponents.js/CustomElements.min.js"),
-            fs.readFileSync(cwd+"hecomes.js"),
-            Buffer.from(js)
-        ])
-    );
+    let bufs = staticBuffers.slice(0);
+    bufs.push(Buffer.from(js));
+    fs.writeFileSync(jsFile, Buffer.concat(bufs));
 
     fs.writeFileSync(cssFile, css);
 }
