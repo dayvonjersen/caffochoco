@@ -9,7 +9,6 @@ import (
 	"regexp"
 	"strconv"
 	"strings"
-	"text/template"
 	"time"
 
 	"github.com/russross/blackfriday"
@@ -53,11 +52,7 @@ func getBlog(path string) string {
 	}
 	blogBytes, err := ioutil.ReadFile(path)
 	checkErr(err)
-	t, err := template.ParseFiles(BLOG_TPL)
-	checkErr(err)
-	buf := new(bytes.Buffer)
-	checkErr(t.Execute(buf, parseBlog(blogBytes)))
-	blog := buf.String()
+	blog := renderTemplate(BLOG_TPL, parseBlog(blogBytes))
 	blogCache[path] = blog
 	return blog
 }
@@ -78,11 +73,7 @@ func getToc() string {
 		}
 		return nil
 	})
-	t, err := template.ParseFiles(BLOG_TOC)
-	checkErr(err)
-	buf := new(bytes.Buffer)
-	checkErr(t.Execute(buf, data))
-	toc := buf.String()
+	toc := renderTemplate(BLOG_TOC, data)
 	blogCache[""] = toc
 	return toc
 }

@@ -71,15 +71,10 @@ func requestHandler(ctx *fasthttp.RequestCtx) {
 	}()
 	defer func() {
 		if x := recover(); x != nil {
-			t, err := template.ParseFiles("./templates/error_500.html")
-			checkErr(err)
-			buf := new(bytes.Buffer)
-			checkErr(t.Execute(buf, struct {
+			ctx.SetStatusCode(500)
+			fmt.Fprintf(ctx, renderTemplate("./templates/error_500.html", struct {
 				Message, Stack string
 			}{x.(string), getStack(debug.Stack())}))
-			ctx.SetStatusCode(500)
-			fmt.Fprintf(ctx, buf.String())
-			// log.Printf("runtime panic: %v\n", x)
 		}
 	}()
 
@@ -123,7 +118,7 @@ func main() {
 
 	listenAddr := fmt.Sprintf("%s:%d", addr, port)
 	log.Println("listening on", listenAddr)
-	log.Fatalln(fasthttp.ListenAndServe(listenAddr, fasthttp.CompressHandler(requestHandler)))
+	log.Fatalln(fasthttp.ListenAndServe(listenAddr, requestHandler))
 }
 
 func checkErr(err error) {
@@ -140,4 +135,12 @@ func fileExists(filename string) bool {
 	}
 	checkErr(err)
 	return true
+}
+
+func renderTemplate(filename string, data interface{}) string {
+	t, err := template.ParseFiles(filename)
+	checkErr(err)
+	buf := new(bytes.Buffer)
+	checkErr(t.Execute(buf, data))
+	return buf.String()
 }
