@@ -1,0 +1,137 @@
+* {
+  box-sizing: border-box;
+}
+
+nav {
+  margin: 0 auto;
+  display: table;
+}
+
+.papertabs {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  position: relative;
+  overflow: hidden;
+  *zoom: 1;
+}
+.papertabs li {
+  float: left;
+}
+.papertabs a {
+  color: inherit;
+  text-decoration: none;
+  /* text-transform: uppercase; */
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  padding: 16px 12px;
+  line-height: 1;
+  float: left;
+  position: relative;
+}
+.papertabs a.pressed .paperripple .circle {
+  -moz-animation: ripple 0.25s ease-in;
+  -webkit-animation: ripple 0.25s ease-in;
+  animation: ripple 0.25s ease-in;
+}
+.papertabs a.focused .paperripple {
+  background: rgba(255, 255, 255, 0.25);
+  transition: none;
+}
+
+#papertabs-line {
+  background: #fff;
+  position: absolute;
+  height: 2px;
+  bottom: 0;
+}
+
+.paperripple {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0);
+  -moz-transition: ease-in 0.4s;
+  -o-transition: ease-in 0.4s;
+  -webkit-transition: ease-in 0.4s;
+  transition: ease-in 0.4s;
+}
+.paperripple .circle {
+  position: absolute;
+  width: 0;
+  height: 0;
+  top: 50%;
+  left: 50%;
+  background: rgba(255, 255, 255, 0);
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+@-moz-keyframes ripple {
+  0% {
+    background: rgba(255, 255, 255, 0);
+  }
+  25% {
+    background: rgba(255, 255, 255, 0.55);
+    width: 15%;
+    padding-bottom: 15%;
+  }
+  50% {
+    background: rgba(255, 255, 255, 0.45);
+    width: 85%;
+    padding-bottom: 85%;
+  }
+  100% {
+    width: 200%;
+    padding-bottom: 200%;
+    background: rgba(255, 255, 255, 0.25);
+  }
+}
+@-webkit-keyframes ripple {
+  0% {
+    background: rgba(255, 255, 255, 0);
+  }
+  25% {
+    background: rgba(255, 255, 255, 0.55);
+    width: 15%;
+    padding-bottom: 15%;
+  }
+  50% {
+    background: rgba(255, 255, 255, 0.45);
+    width: 85%;
+    padding-bottom: 85%;
+  }
+  100% {
+    width: 200%;
+    padding-bottom: 200%;
+    background: rgba(255, 255, 255, 0.25);
+  }
+}
+@keyframes ripple {
+  0% {
+    background: rgba(255, 255, 255, 0);
+  }
+  25% {
+    background: rgba(255, 255, 255, 0.55);
+    width: 15%;
+    padding-bottom: 15%;
+  }
+  50% {
+    background: rgba(255, 255, 255, 0.45);
+    width: 85%;
+    padding-bottom: 85%;
+  }
+  100% {
+    width: 200%;
+    padding-bottom: 200%;
+    background: rgba(255, 255, 255, 0.25);
+  }
+}

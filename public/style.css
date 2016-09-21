@@ -1,0 +1,293 @@
+* {
+  box-sizing: border-box;
+}
+
+nav {
+  margin: 0 auto;
+  display: table;
+}
+
+.papertabs {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  position: relative;
+  overflow: hidden;
+  *zoom: 1;
+}
+.papertabs li {
+  float: left;
+}
+.papertabs a {
+  color: inherit;
+  text-decoration: none;
+  /* text-transform: uppercase; */
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  padding: 16px 12px;
+  line-height: 1;
+  float: left;
+  position: relative;
+}
+.papertabs a.pressed .paperripple .circle {
+  -moz-animation: ripple 0.25s ease-in;
+  -webkit-animation: ripple 0.25s ease-in;
+  animation: ripple 0.25s ease-in;
+}
+.papertabs a.focused .paperripple {
+  background: rgba(255, 255, 255, 0.25);
+  transition: none;
+}
+
+#papertabs-line {
+  background: #fff;
+  position: absolute;
+  height: 2px;
+  bottom: 0;
+}
+
+.paperripple {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0);
+  -moz-transition: ease-in 0.4s;
+  -o-transition: ease-in 0.4s;
+  -webkit-transition: ease-in 0.4s;
+  transition: ease-in 0.4s;
+}
+.paperripple .circle {
+  position: absolute;
+  width: 0;
+  height: 0;
+  top: 50%;
+  left: 50%;
+  background: rgba(255, 255, 255, 0);
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+@-moz-keyframes ripple {
+  0% {
+    background: rgba(255, 255, 255, 0);
+  }
+  25% {
+    background: rgba(255, 255, 255, 0.55);
+    width: 15%;
+    padding-bottom: 15%;
+  }
+  50% {
+    background: rgba(255, 255, 255, 0.45);
+    width: 85%;
+    padding-bottom: 85%;
+  }
+  100% {
+    width: 200%;
+    padding-bottom: 200%;
+    background: rgba(255, 255, 255, 0.25);
+  }
+}
+@-webkit-keyframes ripple {
+  0% {
+    background: rgba(255, 255, 255, 0);
+  }
+  25% {
+    background: rgba(255, 255, 255, 0.55);
+    width: 15%;
+    padding-bottom: 15%;
+  }
+  50% {
+    background: rgba(255, 255, 255, 0.45);
+    width: 85%;
+    padding-bottom: 85%;
+  }
+  100% {
+    width: 200%;
+    padding-bottom: 200%;
+    background: rgba(255, 255, 255, 0.25);
+  }
+}
+@keyframes ripple {
+  0% {
+    background: rgba(255, 255, 255, 0);
+  }
+  25% {
+    background: rgba(255, 255, 255, 0.55);
+    width: 15%;
+    padding-bottom: 15%;
+  }
+  50% {
+    background: rgba(255, 255, 255, 0.45);
+    width: 85%;
+    padding-bottom: 85%;
+  }
+  100% {
+    width: 200%;
+    padding-bottom: 200%;
+    background: rgba(255, 255, 255, 0.25);
+  }
+}
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a,/* abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,*/
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video, button,
+input, textarea, select, option {
+    color: inherit;
+	margin: 0;
+	padding: 0;
+	border: none;
+	font-family: inherit;
+	vertical-align: baseline;
+    font-weight: normal;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+button {
+    background-color: transparent;
+}
+.record {
+    width: 24rem;
+    height: 24rem;
+    text-align: center;
+    border: 1px solid;
+    margin: auto;
+    position: relative;
+    border-style: none;
+    /* box-shadow: 0.3333em 0.3333em 0px rgba(248,242,242,0.1), */
+    /*     0 0 1px rgba(248,242,242,0.1); */
+    cursor: pointer;
+    z-index: 1;
+    background-color: rgba(248,242,242,1);
+    overflow: hidden;
+    color: #080903;
+	text-shadow: 3px 3px 0px rgba(8,9,3,0.1), 0px 0px 1px;
+    
+}
+.record, .record * {
+    transition: all 0.3s ease;
+}
+.record-background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    fill: rgba(210,253,0,1);
+    transform: scale(0.2) translateY(-6%);
+    /* filter: drop-shadow( 0.3333em 0.3333em 0px rgba(8,9,3,0.1)); */
+    z-index: 0;
+}
+/* .record:active .record-background, */
+/* .record:hover .record-background { */
+/*     fill: rgba(210,253,0,1); */
+/*     transform: scale(1); */    
+/*     filter: drop-shadow( 0.3333em 0.3333em 0px rgba(210,253,0,0.2)); */
+/* } */
+.record:active .record-background {
+    filter: drop-shadow( 0 0 0.3333em rgba(210,253,0,0.2));
+}
+.record-top-label, .record-bottom-label {
+    box-shadow: none;
+    /* padding: 1px 0; */
+    background: rgba(255, 255, 255, 0.8);
+    font-size: 1.5em;
+    padding: 1em;
+    margin: 0.5em;
+}
+.record small {
+    opacity: 1;
+}
+.record-bottom-label {
+    position: absolute;
+    width: calc(100% - 1em);
+    bottom: 0;
+}
+.record-center-label {
+    position: absolute;
+    top: 33.3333%;
+    left: 33.3333%;
+    width: 33.3333%;
+    height: 33.3333%;
+    border-radius: 50%;
+    box-shadow: 2px 2px 5px #999 inset;
+    transition: all .2s ease-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
+    z-index: 1;
+    background: #fff;
+}
+/* .record:active, */
+/* .record:hover { */
+/*     background-color: transparent; */
+/*     background-size: 100% auto; */
+/*     box-shadow: none; */
+/*     fill: rgba(210,253,0,1); */
+/*     color: rgba(210,253,0,1); */
+/*     text-shadow: 0.3333em 0.3333em 0px rgba(210,253,0,0.2), 0px 0px 1px; */
+/*     overflow: visible; */
+/* } */
+/* .record:active { */
+/*     text-shadow: 0 0 3px; */
+/* } */
+/* .record:active small, */
+/* .record:hover small { */
+/*     opacity: 0; */
+/* } */
+/* .record:active .record-bottom-label, */
+/* .record:hover .record-bottom-label { */
+/*     bottom: 14.5em; */
+/* } */
+/* .record:active .record-center-label, */
+/* .record:hover .record-center-label { */
+/*     opacity: 0; */
+/* } */
+.record-center-label::after {
+    content: "";
+    background-color: #000;
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    display: inline-block;
+    flex: 0 0 auto;
+    margin-left: 2px;
+}
