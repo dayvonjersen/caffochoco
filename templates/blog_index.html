@@ -1,0 +1,9 @@
+{{range .}} 
+	
+	<a href="/blog/{{.Url}}">{{.Title}}</a>
+	<p>{{range .Tags}} {{.}} {{end}}</p>
+	<time>{{.Date}}</time>
+
+	<hr>
+	
+{{end}}
