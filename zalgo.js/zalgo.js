@@ -1,4 +1,6 @@
 const fs = require('fs');
+const path = require('path');
+const process = require('process');
 const htmlparser2 = require('htmlparser2');
 const nodeSass = require('node-sass');
 
@@ -87,11 +89,13 @@ function Bundle(elements, jsFile = "build/build.js", cssFile = "build/build.css"
         js += element.js;
         css += element.css;
     });
+
+    let cwd = `./${ path.basename(process.cwd()) != "zalgo.js" ? "zalgo.js/" : "" }`;
     
     fs.writeFileSync(jsFile, 
         Buffer.concat([
-            fs.readFileSync("node_modules/webcomponents.js/CustomElements.min.js"),
-            fs.readFileSync("hecomes.js"),
+            fs.readFileSync(cwd+"node_modules/webcomponents.js/CustomElements.min.js"),
+            fs.readFileSync(cwd+"hecomes.js"),
             Buffer.from(js)
         ])
     );
