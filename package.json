@@ -1,8 +1,8 @@
 {
-    "dependencies": {
-        "acorn": "^4.0.3",
-        "glob": "^7.1.0",
-        "gulp": "^3.9.1",
-        "uglify-js-harmony": "^2.6.2"
-    }
+  "dependencies": {
+    "acorn": "^4.0.3",
+    "glob": "^7.1.0",
+    "gulp": "^3.9.1",
+    "uglify-js-harmony": "^2.6.2"
+  }
 }

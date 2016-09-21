@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "htmlparser2": "^3.9.1",
+    "node-sass": "^3.10.0",
+    "webcomponents.js": "^0.7.22"
+  }
+}
