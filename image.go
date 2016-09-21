@@ -29,7 +29,7 @@ func imageHandler(ctx *fasthttp.RequestCtx) {
 		checkErr(err)
 		palette, err := vibrant.NewPaletteFromImage(img)
 		checkErr(err)
-		ctx.Response.Header.Set("Content-Type", "text/css")
+		ctx.Response.Header.Set("Content-Type", "text/css; charset=UTF-8")
 		for _, swatch := range palette.ExtractAwesome() {
 			fmt.Fprintln(ctx, swatch.String())
 		}

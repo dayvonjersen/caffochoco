@@ -23,7 +23,7 @@ var apiRoutes = []*apiRoute{
 func apiHandler(ctx *fasthttp.RequestCtx) {
 	path := strings.TrimPrefix(string(ctx.Path()), "/api")
 
-	ctx.Response.Header.Set("Content-Type", "application/json")
+	ctx.Response.Header.Set("Content-Type", "application/json; charset=UTF-8")
 
 	var ret map[string]interface{}
 	for _, route := range apiRoutes {
