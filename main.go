@@ -123,7 +123,7 @@ func main() {
 
 	listenAddr := fmt.Sprintf("%s:%d", addr, port)
 	log.Println("listening on", listenAddr)
-	log.Fatalln(fasthttp.ListenAndServe(listenAddr, requestHandler))
+	log.Fatalln(fasthttp.ListenAndServe(listenAddr, fasthttp.CompressHandler(requestHandler)))
 }
 
 func checkErr(err error) {
