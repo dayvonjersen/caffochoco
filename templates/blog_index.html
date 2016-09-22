@@ -57,6 +57,11 @@
     body > div > div {
         flex: 1 1 50%;
     }
+    .leftpanel {
+        background-color: #404c56;
+        background-image: url("/image/blog_index.jpg");
+        background-size: cover;
+    }
 
     @media (max-width: 1024px) {
         .leftpanel { display: none; }
@@ -70,9 +75,10 @@
 
 
 </style>
+<title>words</title>
 <body>
     <div>
-        <div class='leftpanel' style='background:#404c56'>&nbsp;</div>
+        <div class='leftpanel'>&nbsp;</div>
         <div style='overflow-y:auto'>
             {{range .}} 
             <article>
