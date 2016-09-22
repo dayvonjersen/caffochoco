@@ -72,6 +72,7 @@ func requestHandler(ctx *fasthttp.RequestCtx) {
 	defer func() {
 		if x := recover(); x != nil {
 			ctx.SetStatusCode(500)
+			ctx.Response.Header.Set("Content-Type", "text/html; charset=UTF-8")
 			fmt.Fprintf(ctx, renderTemplate("./templates/error_500.html", struct {
 				Message, Stack string
 			}{x.(string), getStack(debug.Stack())}))

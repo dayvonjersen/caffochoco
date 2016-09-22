@@ -1,9 +1,86 @@
-{{range .}} 
-	
-	<a href="/blog/{{.Url}}">{{.Title}}</a>
-	<p>{{range .Tags}} {{.}} {{end}}</p>
-	<time>{{.Date}}</time>
+<style>
+    @import "/font/fonts.css";
 
-	<hr>
-	
-{{end}}
+    article {
+        margin: 90px 100px;
+        color: #404c56;
+    }
+
+    article header {
+        font-family: "futura-smallcaps-medium";
+        font-variant: small-caps;
+        font-feature-settings: "lnum";
+        letter-spacing: 1.1px;
+        font-size: 14px;
+        line-height: 1.4;
+        text-transform: lowercase;
+    }
+
+    article header span {
+        color: #f49d00;
+    }
+
+    article a {
+        font-family: "tisa-regular";
+        letter-spacing: -.6px;
+        font-size: 28px;
+        line-height: 1.58;
+        text-decoration: none;
+        color: #404c56;
+    }
+
+    article a:hover {
+        text-decoration: underline;
+    }
+
+    html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    body > div {
+        flex: 1;
+
+        display: flex;
+        margin: 38px;
+        box-shadow: 0 0 30px #ccc;
+        height: calc(100% - 86px);
+    }
+
+    body > div > div {
+        flex: 1 1 50%;
+    }
+
+    @media (max-width: 1024px) {
+        .leftpanel { display: none; }
+    }
+
+    @media (max-width: 640px) {
+        article {
+            margin: 45px 50px;
+        }
+    }
+
+
+</style>
+<body>
+    <div>
+        <div class='leftpanel' style='background:#404c56'>&nbsp;</div>
+        <div style='overflow-y:auto'>
+            {{range .}} 
+            <article>
+                <header><time>{{.Date.Format "January 2006"}}</time><small>&#x202F;&bull;&#x202F;</small><span>{{range .Tags}}{{.}}{{end}}</span></header>
+                <a href="/blog/{{.Url}}">{{.Title}}</a>
+            </article>	
+            {{end}}
+        </div>
+    </div>
+</body>
+

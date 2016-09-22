@@ -17,7 +17,7 @@ import (
 )
 
 const (
-	BLOG_DIR = "/home/tso/blog/"
+	BLOG_DIR = "./blog/"
 	BLOG_TPL = "./templates/blog_entry.html"
 	BLOG_TOC = "./templates/blog_index.html"
 )

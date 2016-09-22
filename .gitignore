@@ -4,3 +4,5 @@ cmd/watch/watch
 *.jpg
 *.png
 node_modules/
+blog/
+public/font/
