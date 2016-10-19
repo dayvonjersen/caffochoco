@@ -42,6 +42,7 @@ func validateCache() {
 	if commit != lastCommit {
 		blogCache = map[string]string{}
 		lastCommit = commit
+		tocCache = nil
 	}
 }
 
@@ -57,10 +58,11 @@ func getBlog(path string) string {
 	return blog
 }
 
-func getToc() string {
-	validateCache()
-	if toc, ok := blogCache[""]; ok {
-		return toc
+var tocCache []*blogPost
+
+func getTocData() []*blogPost {
+	if tocCache != nil {
+		return tocCache
 	}
 	data := []*blogPost{}
 	filepath.Walk(BLOG_DIR, func(path string, info os.FileInfo, err error) error {
@@ -73,6 +75,15 @@ func getToc() string {
 		}
 		return nil
 	})
+	return data
+}
+
+func getToc() string {
+	validateCache()
+	if toc, ok := blogCache[""]; ok {
+		return toc
+	}
+	data := getTocData()
 	toc := renderTemplate(BLOG_TOC, data)
 	blogCache[""] = toc
 	return toc
@@ -96,15 +107,15 @@ func blogHandler(ctx *fasthttp.RequestCtx) {
 var re = *regexp.MustCompile(`(?i)(title|date|intro|tags|status|toc|position):(.+)`)
 
 type blogPost struct {
-	Title    string
-	Date     time.Time
-	Intro    string
-	Tags     []string
-	Status   int
-	Toc      bool
-	Position int
-	Blog     string
-	Url      string
+	Title    string    `json:"title"`
+	Date     time.Time `json:"date"`
+	Intro    string    `json:"intro"`
+	Tags     []string  `json:"tags"`
+	Status   int       `json:"status"`
+	Toc      bool      `json:"toc"`
+	Position int       `json:"position"`
+	Blog     string    `json:"blog"`
+	Url      string    `json:"url"`
 }
 
 func parseMetadata(blogBytes []byte) (*blogPost, []byte) {

@@ -18,6 +18,7 @@ type apiRoute struct {
 var apiRoutes = []*apiRoute{
 	&apiRoute{re: regexp.MustCompile(`^/$`), fn: index},
 	&apiRoute{re: regexp.MustCompile(`^/release/(\d+)$`), fn: release},
+	&apiRoute{re: regexp.MustCompile(`^/blog`), fn: blog},
 }
 
 func apiHandler(ctx *fasthttp.RequestCtx) {
@@ -62,4 +63,7 @@ func release(params []string) map[string]interface{} {
 		return map[string]interface{}(stuff[0])
 	}
 	return nil
+}
+func blog(params []string) map[string]interface{} {
+	return map[string]interface{}{"blog": getTocData()}
 }
