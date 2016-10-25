@@ -31,7 +31,14 @@ func imageHandler(ctx *fasthttp.RequestCtx) {
 		checkErr(err)
 		ctx.Response.Header.Set("Content-Type", "text/css; charset=UTF-8")
 		for _, swatch := range palette.ExtractAwesome() {
-			fmt.Fprintln(ctx, swatch.String())
+			c := swatch.Color
+			r, g, b := c.RGB()
+			fmt.Fprintf(ctx, `
+.%s {
+	background-color: %s;
+	color: %s;
+	box-shadow: 0 0 10px rgba(%d,%d,%d,1); 
+}`, strings.ToLower(swatch.Name), c, c.TitleTextColor(), r, g, b)
 		}
 	} else if path == "./image/" || !fileExists(path) {
 		notfoundHandler(ctx)
