@@ -81,7 +81,7 @@
         <div style='overflow-y:auto'>
             {{range .}} 
             <article>
-                <header><time>{{.Date.Format "January 2006"}}</time><small>&#x202F;&bull;&#x202F;</small><span>{{range .Tags}}{{.}}{{end}}</span></header>
+                <header>{{if .Dateisset}}<time>{{.Date.Format "January 2006"}}</time><small>&#x202F;&bull;&#x202F;</small>{{end}}<span>{{range .Tags}}{{.}}{{end}}</span></header>
                 <a href="/blog/{{.Url}}">{{.Title}}</a>
             </article>	
             {{end}}

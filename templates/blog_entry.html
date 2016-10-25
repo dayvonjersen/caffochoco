@@ -10,18 +10,18 @@
 
             h1, h2, h3, h4, h5, h6 {
                 font-family: "tisa-regular";
-                letter-spacing: -.6px;
                 line-height: 1.58;
+            }
+            h1, h2, h3, h4 {
+                letter-spacing: -.6px;
             }
 
             body > header > h2 {
-                font-family: "futura-smallcaps-medium";
-                font-variant: small-caps;
-                font-feature-settings: "lnum";
                 letter-spacing: 1.1px;
                 font-size: 14px;
                 line-height: 1.4;
-                text-transform: lowercase;
+                margin: 1em 0 !important;
+                opacity: 0.5;
             }
 
             html, body {
@@ -31,14 +31,17 @@
 
                 font-family: "freightsans-book";
                 font-size: 22px;
-                line-height: 1.618;
+                line-height: 1.78;
             }
 
-            html {font-size: 1em;}
+            html {
+                font-size: 1em;
+                padding: 0 1rem;
+            }
 
             body {
                 color: #262d33;
-                width: 50%;
+                max-width: 40rem;
                 margin: auto;
             }
 
@@ -100,11 +103,11 @@
                 margin: 0;
             }
             body > header {
-                padding-top: 25vh;
+                padding-top: 8vh;
                 margin-bottom: 2.441em;
             }
             #blogblog {
-                padding-bottom: 25vh;
+                padding-bottom: 8vh;
             }
 
             a[href] { color: #72b0eb }
@@ -113,7 +116,7 @@
         <script>
             function readtime(articleSelector) {
                 let articleElement = document.querySelector(articleSelector);
-                return articleElement.textContent.split(/\W+/).length/260+.5|0;
+                return articleElement.textContent.split(/\W+/).length/260+.5|0 || "&lt;1";
             }
 let fdate = (date) => {
     let diff = ( (new Date()).getTime() - date.getTime() ) / 1000;
@@ -147,8 +150,7 @@ window.addEventListener("DOMContentLoaded", () => {
     <body>
         <header>
             <h1>{{.Title}}</h1>
-            <h2><div style="display: inline-block;width: 40px;height: 40px;border-radius: 50%;background: yellow;vertical-align: middle;margin-right: 1em;box-shadow: 0 0 20px #a5a5a54d;"></div>by dayvonjersen <div style="display: inline;border: 1px solid;color: #9cf;padding: .5em 1em;border-radius: 25% / 60%;text-transform: uppercase;font-size: 0.8333em;">follow</div></h2>
-            <h2 id='blogdate' title='{{.Date.Format "Monday, January _2 2006 at 3:04PM MST"}}'>{{.Date.Format "2006-01-02T15:04:05Z07:00" }}</h2>
+            {{if .Dateisset}}<h2 id='blogdate' title='{{.Date.Format "Monday, January _2 2006 at 3:04PM MST"}}'>{{.Date.Format "2006-01-02T15:04:05Z07:00" }}</h2>{{end}}
         </header>
         <div id='blogblog'>
             {{.Blog}}

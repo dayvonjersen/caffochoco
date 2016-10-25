@@ -35,7 +35,7 @@ func getLastCommit() string {
 }
 
 var lastCommit string
-var blogCache map[string]string
+var blogCache = map[string]string{}
 
 func validateCache() {
 	commit := getLastCommit()
@@ -47,10 +47,10 @@ func validateCache() {
 }
 
 func getBlog(path string) string {
-	validateCache()
-	if blog, ok := blogCache[path]; ok {
-		return blog
-	}
+	// validateCache()
+	// if blog, ok := blogCache[path]; ok {
+	// 	return blog
+	// }
 	blogBytes, err := ioutil.ReadFile(path)
 	checkErr(err)
 	blog := renderTemplate(BLOG_TPL, parseBlog(blogBytes))
@@ -61,9 +61,9 @@ func getBlog(path string) string {
 var tocCache []*blogPost
 
 func getTocData() []*blogPost {
-	if tocCache != nil {
-		return tocCache
-	}
+	// if tocCache != nil {
+	// 	return tocCache
+	// }
 	data := []*blogPost{}
 	filepath.Walk(BLOG_DIR, func(path string, info os.FileInfo, err error) error {
 		if !info.IsDir() && strings.HasSuffix(info.Name(), ".md") {
@@ -79,10 +79,10 @@ func getTocData() []*blogPost {
 }
 
 func getToc() string {
-	validateCache()
-	if toc, ok := blogCache[""]; ok {
-		return toc
-	}
+	// validateCache()
+	// if toc, ok := blogCache[""]; ok {
+	// 	return toc
+	// }
 	data := getTocData()
 	toc := renderTemplate(BLOG_TOC, data)
 	blogCache[""] = toc
@@ -107,15 +107,16 @@ func blogHandler(ctx *fasthttp.RequestCtx) {
 var re = *regexp.MustCompile(`(?i)(title|date|intro|tags|status|toc|position):(.+)`)
 
 type blogPost struct {
-	Title    string    `json:"title"`
-	Date     time.Time `json:"date"`
-	Intro    string    `json:"intro"`
-	Tags     []string  `json:"tags"`
-	Status   int       `json:"status"`
-	Toc      bool      `json:"toc"`
-	Position int       `json:"position"`
-	Blog     string    `json:"blog"`
-	Url      string    `json:"url"`
+	Title     string    `json:"title"`
+	Date      time.Time `json:"date"`
+	Dateisset bool      `json:"-"`
+	Intro     string    `json:"intro"`
+	Tags      []string  `json:"tags"`
+	Status    int       `json:"status"`
+	Toc       bool      `json:"toc"`
+	Position  int       `json:"position"`
+	Blog      string    `json:"blog"`
+	Url       string    `json:"url"`
 }
 
 func parseMetadata(blogBytes []byte) (*blogPost, []byte) {
@@ -135,6 +136,7 @@ func parseMetadata(blogBytes []byte) (*blogPost, []byte) {
 		case "date":
 			var err error
 			ret.Date, err = time.Parse("Mon 02 Jan 2006 15:04:05 PM MST", value)
+			ret.Dateisset = true
 			checkErr(err)
 		case "intro":
 			ret.Intro = value

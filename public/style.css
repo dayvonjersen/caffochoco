@@ -242,6 +242,13 @@ main {
   align-self: center;
 }
 
+body > header {
+    position:fixed;
+    top:0;
+    width:100%;
+    z-index:10000;
+}
+
 .navbar {
   background: #00b5fb;
   color: #fff;

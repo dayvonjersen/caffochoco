@@ -9,9 +9,9 @@
         <script src='/components.js'></script>
     </head>
     <body>
-        <header style="position:fixed;top:0;width:100%;z-index:10000">
+        <header>
             <nav class='navbar'>
-                <h1><img src='image/awesome.png'><a href="#" class='h1'>dayvonjersen</a></h1>
+                <h1><img src='image/awesome.png'><a href="/" class='h1'>dayvonjersen</a></h1>
 
                 <a href='#' class='navbar-hamburger' onclick='event.preventDefault();document.querySelector(".navbar").classList.toggle("navbar-expand")'>🍔</a>
                 <a href='#sessions' class='navbar-link'>sessions</a>
@@ -24,10 +24,10 @@
 
         <main>
             <section id="intro">
-            <style>
-                main > section:nth-child(2n) {
-                    background-attachment: fixed;
-                }
+                <style>
+                    main > section:nth-child(2n) {
+                        background-attachment: fixed;
+                    }
                     section#intro {
                         background-image: url(image/awesome.png);
                         background-size: 50%;
@@ -39,7 +39,7 @@
                         color: #000;
                     }
                 </style>
-                <script>
+                <script defer>
                     window.onload = () => { 
                         let introCtn = document.querySelector("#intro");
                         window.addEventListener("scroll", () => {
@@ -61,7 +61,8 @@
                 </div>
                 <div class="right">&nbsp;</div>
             </section>
-            <section id="recipes" 
+            <section id="recipes"
+                class="muted"
                 style="background-image:url(image/pexels-photo-29346.jpg)">
                 <style scoped>
                     @import url("/image/pexels-photo-29346.jpg.css");
@@ -72,6 +73,7 @@
                 </div>
             </section>
             <section id="sessions"
+                class="darkmuted"
                 style="background-image:url(image/djr.jpg)">
                 <style scoped>
                     @import url("image/djr.jpg.css");
@@ -82,6 +84,7 @@
                 <div class="right">&nbsp;</div>
             </section>
             <section id="tracks"
+                class="muted"
                 style="background-image:url(image/mixer.jpg)">
                 <style scoped>
                     @import url("image/mixer.jpg.css");
@@ -94,6 +97,7 @@
                 </div>
             </section>
             <section id="code"
+                class="muted"
                 style="background-image:url(image/shutterstock_316477958.jpg)">
                 <style scoped>
                     @import url("image/shutterstock_316477958.jpg.css");
@@ -106,16 +110,15 @@
                 </div>
             </section>
             <section id="words"
+                class="muted"
                 style="background-image:url(image/pexels-photo-45718.jpg)">
                 <style scoped>
                     @import url("image/pexels-photo-45718.jpg.css");
                 </style>
                 <div class="left">
                     <div style="box-shadow: 0 0 33px rgb(43, 43, 44);background: #fff;text-align: left;padding: 1em;">
-                        <h6>recent blog posts:</h6>
-    <h1>Hello World</h1>
-    <h1>Hello World</h1>
-    <h1>Hello World</h1>
+
+                        <caffo-blog></caffo-blog>
   </div>
                 </div>
                 <div class="right vibrant">
@@ -163,7 +166,7 @@
                         opacity: 1;
                     }
                 </style>
-                <script>
+                <script defer>
                     window.addEventListener("DOMContentLoaded", () => {
                         var svgElement = document.querySelector("#fit-text");
                         var resizeFn = function() {
