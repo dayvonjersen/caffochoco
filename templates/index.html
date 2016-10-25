@@ -78,8 +78,24 @@
                 <style scoped>
                     @import url("image/djr.jpg.css");
                 </style>
+                <style>
+                    section#sessions {
+                        background-position: 0% 100%;
+                        transition: all 10ms linear;
+                    }
+                </style>
+                <script defer>
+                    window.onload = () => { 
+                        let sessionsCtn = document.querySelector("#sessions");
+                        window.addEventListener("scroll", () => {
+                            let r = sessionsCtn.getBoundingClientRect();
+                            requestAnimationFrame(()=>sessionsCtn.style.backgroundPosition = `0% ${ (Math.abs(r.height+r.top)/r.height * 100) }%`);
+                        });
+
+                    };
+                </script>
                 <div class="left vibrant">
-                    <h1>and has spent a lot of time DJing...</h1>
+                    <h1>and spends his time DJing...</h1>
                 </div>
                 <div class="right">&nbsp;</div>
             </section>
@@ -93,7 +109,7 @@
                     <!-- <iframe width="100%" height="450" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/users/233217&amp;color=ff5500&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false"></iframe> -->
                 </div>
                 <div class="right vibrant">
-                    <h1>&amp; making music</h1>
+                    <h1>making music</h1>
                 </div>
             </section>
             <section id="code"
@@ -103,7 +119,7 @@
                     @import url("image/shutterstock_316477958.jpg.css");
                 </style>
                 <div class="left vibrant">
-                    <h1>Now he writes code under a pseudonym</h1>
+                    <h1>coding</h1>
                 </div>
                 <div class="right">
                     
@@ -122,13 +138,13 @@
   </div>
                 </div>
                 <div class="right vibrant">
-                    <h1><small><small style="font-size:x-small">(very)</small> occasionally</small> writes things</h1>
+                    <h1><small><small style="font-size:x-small">(very)</small> occasionally</small> writing words</h1>
                 </div>
             </section>
             <section id="topsekrit"
                 style="background:#000;color:#fff">
                 <div class="left">
-                    <h1>and <br><big> is working <br><big>on something <br> <big>big</big>.</big></big></h1>
+                    <h1>and <br><big> might be working <br><big>on something <br> <big>big</big>.</big></big></h1>
                 </div>
                 <div class="right"><center>???</center></div>
             </section>
@@ -188,5 +204,6 @@
         </main>
 
         <footer class="with-love">with <span title="less than three from new jersey" style='color:#f39'>&lt;3</span> from nj</footer>
+        <script src='/scoped-css-polyfill.js'></script>
     </body>
 </html>

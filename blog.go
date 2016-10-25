@@ -91,8 +91,8 @@ func getToc() string {
 
 func blogHandler(ctx *fasthttp.RequestCtx) {
 	ctx.Response.Header.Set("Content-Type", "text/html; charset=UTF-8")
-	path := strings.TrimPrefix(string(ctx.Path()), "/blog/")
-	if path == "" {
+	path := strings.TrimPrefix(string(ctx.Path()), "/blog")
+	if path == "" || path == "/" {
 		fmt.Fprint(ctx, getToc())
 		return
 	}

@@ -33,9 +33,9 @@ func notfoundHandler(ctx *fasthttp.RequestCtx) {
 }
 
 var routes = map[string]fasthttp.RequestHandler{
-	"/api/":   apiHandler,
-	"/image/": imageHandler,
-	"/blog/":  blogHandler,
+	"/api":   apiHandler,
+	"/image": imageHandler,
+	"/blog":  blogHandler,
 	// audioHandler
 }
 
@@ -83,13 +83,12 @@ func requestHandler(ctx *fasthttp.RequestCtx) {
 
 	switch {
 	case path == "/", path == "/index.html":
-		fallthrough
-	default:
 		fasthttp.ServeFile(ctx, "./templates/index.html")
 	case router(path, ctx):
 	case fileExists(STATIC_DIR + path):
 		staticHandler(ctx)
-
+	default:
+		notfoundHandler(ctx)
 	}
 }
 
