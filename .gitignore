@@ -4,3 +4,5 @@ cmd/watch/watch
 node_modules/
 blog/
 public/font/
+public/webfont/
+image/

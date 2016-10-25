@@ -1,17 +1,189 @@
 <!doctype html>
 <html>
     <head>
-        <meta charset="utf-8">
-        <link rel="stylesheet" href="style.css">
-        <style>
-            body { background: #000; color: #fff; }
-        </style>
+        <meta charset='utf-8'>
+        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+        <title>dayvonjersen.com</title>
+        <link rel='stylesheet' href='/style.css'>
+        <link rel='stylesheet' href='/components.css'>
+        <script src='/components.js'></script>
     </head>
-    <body>Loading...
-        <script src="/app.js"></script>
-        <script
-    src="https://code.jquery.com/jquery-3.1.0.min.js"
-    integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="
-    crossorigin="anonymous"></script>
+    <body>
+        <header style="position:fixed;top:0;width:100%;z-index:10000">
+            <nav class='navbar'>
+                <h1><img src='image/awesome.png'><a href="#" class='h1'>dayvonjersen</a></h1>
+
+                <a href='#' class='navbar-hamburger' onclick='event.preventDefault();document.querySelector(".navbar").classList.toggle("navbar-expand")'>🍔</a>
+                <a href='#sessions' class='navbar-link'>sessions</a>
+                <a href='#tracks' class='navbar-link'>tracks</a>
+                <a href='#code' class='navbar-link'>code</a>
+                <a href='#words' class='navbar-link'>blog</a>
+                <a href='#contact' class='navbar-link'>contact</a>
+            </nav>
+        </header>
+
+        <main>
+            <section id="intro">
+            <style>
+                main > section:nth-child(2n) {
+                    background-attachment: fixed;
+                }
+                    section#intro {
+                        background-image: url(image/awesome.png);
+                        background-size: 50%;
+                        background-repeat: no-repeat;
+                        background-position: 100% 50vh;
+                        transition: all 10ms linear;
+                    }
+                    section#intro header {
+                        color: #000;
+                    }
+                </style>
+                <script>
+                    window.onload = () => { 
+                        let introCtn = document.querySelector("#intro");
+                        window.addEventListener("scroll", () => {
+                            let introHeight = introCtn.getBoundingClientRect().height;
+                            requestAnimationFrame(()=>introCtn.style.backgroundPosition = `100% ${(1 - window.scrollY/introHeight) * 50}vh`);
+                        });
+
+                        // compensate for fixed position header
+                        let navbar = document.querySelector(".navbar");
+                        window.addEventListener("hashchange", () => {
+                            if(!window.scrollY || window.scrollMaxY === window.scrollY) return;
+                            let navbarHeight = navbar.getBoundingClientRect().height;
+                            window.scrollBy(0, -1*navbarHeight);
+                        });
+                    };
+                </script>
+                <div class="left">
+                    <h1>So you have this person called <big>Dave</big>, <small>from New Jersey</small>...</h1>
+                </div>
+                <div class="right">&nbsp;</div>
+            </section>
+            <section id="recipes" 
+                style="background-image:url(image/pexels-photo-29346.jpg)">
+                <style scoped>
+                    @import url("/image/pexels-photo-29346.jpg.css");
+                </style>
+                <div class="left">&nbsp;</div>
+                <div class="right vibrant">
+                    <h1>...who used to be a cook</h1>
+                </div>
+            </section>
+            <section id="sessions"
+                style="background-image:url(image/djr.jpg)">
+                <style scoped>
+                    @import url("image/djr.jpg.css");
+                </style>
+                <div class="left vibrant">
+                    <h1>and has spent a lot of time DJing...</h1>
+                </div>
+                <div class="right">&nbsp;</div>
+            </section>
+            <section id="tracks"
+                style="background-image:url(image/mixer.jpg)">
+                <style scoped>
+                    @import url("image/mixer.jpg.css");
+                </style>
+                <div class="left">
+                    <!-- <iframe width="100%" height="450" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/users/233217&amp;color=ff5500&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false"></iframe> -->
+                </div>
+                <div class="right vibrant">
+                    <h1>&amp; making music</h1>
+                </div>
+            </section>
+            <section id="code"
+                style="background-image:url(image/shutterstock_316477958.jpg)">
+                <style scoped>
+                    @import url("image/shutterstock_316477958.jpg.css");
+                </style>
+                <div class="left vibrant">
+                    <h1>Now he writes code under a pseudonym</h1>
+                </div>
+                <div class="right">
+                    
+                </div>
+            </section>
+            <section id="words"
+                style="background-image:url(image/pexels-photo-45718.jpg)">
+                <style scoped>
+                    @import url("image/pexels-photo-45718.jpg.css");
+                </style>
+                <div class="left">
+                    <div style="box-shadow: 0 0 33px rgb(43, 43, 44);background: #fff;text-align: left;padding: 1em;">
+                        <h6>recent blog posts:</h6>
+    <h1>Hello World</h1>
+    <h1>Hello World</h1>
+    <h1>Hello World</h1>
+  </div>
+                </div>
+                <div class="right vibrant">
+                    <h1><small><small style="font-size:x-small">(very)</small> occasionally</small> writes things</h1>
+                </div>
+            </section>
+            <section id="topsekrit"
+                style="background:#000;color:#fff">
+                <div class="left">
+                    <h1>and <br><big> is working <br><big>on something <br> <big>big</big>.</big></big></h1>
+                </div>
+                <div class="right"><center>???</center></div>
+            </section>
+            <section id="contact">
+                <style scoped>
+                    svg {
+                        width: 100%;
+                        fill: currentColor;
+                        overflow: visible;
+                    }
+                    text {
+                        font-family: inherit;
+                        font-size: 1rem;
+                        font-weight: inherit;
+                        text-anchor: middle;
+                    }
+                    text a {
+                        cursor: pointer;
+                    }
+                    text a:hover {
+                        text-decoration: underline;
+                    }
+                    #ft-email,
+                    #ft-me {
+                        fill: currentColor;
+                    }
+                    text:hover #ft-email,
+                    #ft-at {
+                        fill: rgba(0,0,0,0.05);
+                    }
+                    text:hover #ft-me,
+                    text:hover #ft-at,
+                    text:hover a {
+                        fill: #00b5fb;
+                        opacity: 1;
+                    }
+                </style>
+                <script>
+                    window.addEventListener("DOMContentLoaded", () => {
+                        var svgElement = document.querySelector("#fit-text");
+                        var resizeFn = function() {
+                            var textElement = svgElement.querySelector('text'),
+                            w = textElement.offsetWidth || textElement.getComputedTextLength(),
+                            h = textElement.offsetHeight || 24;
+                            svgElement.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+                        };
+                        resizeFn();
+                        window.addEventListener('resize', resizeFn);
+                    });
+                </script>
+                <div style="width:100%;padding:3.3333rem">
+                    <svg id="fit-text">
+                        <text x="50%" y="20"><tspan id="ft-email">email</tspan> <a xlink:href="mailto:me@dayvonjersen.com?subject=hi"><tspan id="ft-me">me</tspan><tspan id="ft-at">@dayvonjersen.com</tspan></a></text>
+                    </svg>
+                </div>
+            </section>
+        </main>
+
+        <footer class="with-love">with <span title="less than three from new jersey" style='color:#f39'>&lt;3</span> from nj</footer>
     </body>
 </html>
