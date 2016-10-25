@@ -1,3 +1,2 @@
-#\!/usr/bin/env bash
-goimports -w *.go
-go build && ./caffochoco |& pp
+#!/usr/bin/env bash
+go build && ./caffochoco -nocache |& pp

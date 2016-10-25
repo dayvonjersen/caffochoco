@@ -34,8 +34,10 @@ func getLastCommit() string {
 	return head.Target().String()
 }
 
-var lastCommit string
-var blogCache = map[string]string{}
+var (
+	lastCommit string
+	blogCache  = map[string]string{}
+)
 
 func validateCache() {
 	commit := getLastCommit()
@@ -47,10 +49,12 @@ func validateCache() {
 }
 
 func getBlog(path string) string {
-	// validateCache()
-	// if blog, ok := blogCache[path]; ok {
-	// 	return blog
-	// }
+	if !nocache {
+		validateCache()
+		if blog, ok := blogCache[path]; ok {
+			return blog
+		}
+	}
 	blogBytes, err := ioutil.ReadFile(path)
 	checkErr(err)
 	blog := renderTemplate(BLOG_TPL, parseBlog(blogBytes))
@@ -61,9 +65,9 @@ func getBlog(path string) string {
 var tocCache []*blogPost
 
 func getTocData() []*blogPost {
-	// if tocCache != nil {
-	// 	return tocCache
-	// }
+	if !nocache && tocCache != nil {
+		return tocCache
+	}
 	data := []*blogPost{}
 	filepath.Walk(BLOG_DIR, func(path string, info os.FileInfo, err error) error {
 		if !info.IsDir() && strings.HasSuffix(info.Name(), ".md") {
@@ -79,10 +83,12 @@ func getTocData() []*blogPost {
 }
 
 func getToc() string {
-	// validateCache()
-	// if toc, ok := blogCache[""]; ok {
-	// 	return toc
-	// }
+	if !nocache {
+		validateCache()
+		if toc, ok := blogCache[""]; ok {
+			return toc
+		}
+	}
 	data := getTocData()
 	toc := renderTemplate(BLOG_TOC, data)
 	blogCache[""] = toc
