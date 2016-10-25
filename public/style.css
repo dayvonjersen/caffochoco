@@ -290,6 +290,7 @@ body > header {
 .navbar img {
   width: 1em;
   margin-right: 0.2em;
+  vertical-align: middle;
 }
 
 .navbar a {
@@ -386,6 +387,8 @@ body > header {
   .navbar-expand .navbar-hamburger::after {
     content: "̽";
   }
+
+
 }
 
 .footer {
@@ -465,6 +468,18 @@ section .right {
     text-align: left;
     padding: 1em;
 }
+@media screen and (max-width: 480px) {
+  section {
+    flex-wrap: wrap;
+  }
+  section:nth-child(2n) .right {
+    order: -1;
+ }
+  section .left,
+  section .right {
+    flex-basis: 100%;
+  }
+  }
 
 
 footer.with-love {

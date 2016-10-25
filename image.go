@@ -33,7 +33,7 @@ func imageHandler(ctx *fasthttp.RequestCtx) {
 		for _, swatch := range palette.ExtractAwesome() {
 			fmt.Fprintln(ctx, swatch.String())
 		}
-	} else if path == "./image/" {
+	} else if path == "./image/" || !fileExists(path) {
 		notfoundHandler(ctx)
 	} else {
 		imageFSHandler(ctx)
