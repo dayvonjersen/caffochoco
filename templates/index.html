@@ -11,7 +11,7 @@
     <body>
         <header>
             <nav class='navbar'>
-                <h1><img src='image/awesome.png'><a href="/" class='h1'>dayvonjersen</a></h1>
+                <h1><img src='image/awesome.png'><a href="#" class='h1'>dayvonjersen</a></h1>
 
                 <a href='#' class='navbar-hamburger' onclick='event.preventDefault();document.querySelector(".navbar").classList.toggle("navbar-expand")'>🍔</a>
                 <a href='#sessions' class='navbar-link'>sessions</a>
@@ -40,7 +40,7 @@
                     }
                 </style>
                 <script defer>
-                    window.onload = () => { 
+                    window.addEventListener('load', () => { 
                         let introCtn = document.querySelector("#intro");
                         window.addEventListener("scroll", () => {
                             let introHeight = introCtn.getBoundingClientRect().height;
@@ -54,7 +54,7 @@
                             let navbarHeight = navbar.getBoundingClientRect().height;
                             window.scrollBy(0, -1*navbarHeight);
                         });
-                    };
+                    });
                 </script>
                 <div class="left">
                     <h1>So you have this person called <big>Dave</big>, <small>from New Jersey</small>...</h1>
