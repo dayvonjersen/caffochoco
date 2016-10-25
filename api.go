@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"regexp"
-	"strconv"
 	"strings"
 
 	"github.com/valyala/fasthttp"
@@ -16,8 +15,6 @@ type apiRoute struct {
 }
 
 var apiRoutes = []*apiRoute{
-	&apiRoute{re: regexp.MustCompile(`^/$`), fn: index},
-	&apiRoute{re: regexp.MustCompile(`^/release/(\d+)$`), fn: release},
 	&apiRoute{re: regexp.MustCompile(`^/blog`), fn: blog},
 }
 
@@ -43,27 +40,6 @@ func apiHandler(ctx *fasthttp.RequestCtx) {
 	fmt.Fprintf(ctx, string(b))
 }
 
-func index(params []string) map[string]interface{} {
-	stuff := map[string]interface{}{
-		"releases": fetchAll(`SELECT * FROM releases`),
-		"sections": fetchAll(`SELECT * FROM sections`),
-	}
-	return stuff
-}
-func release(params []string) map[string]interface{} {
-	if len(params) != 1 {
-		return nil
-	}
-	id, err := strconv.Atoi(params[0])
-	if err != nil {
-		return nil
-	}
-	stuff := fetchAll(fmt.Sprintf("SELECT * FROM releases WHERE id = %d", id))
-	if len(stuff) > 0 {
-		return map[string]interface{}(stuff[0])
-	}
-	return nil
-}
 func blog(params []string) map[string]interface{} {
 	return map[string]interface{}{"blog": getTocData()}
 }

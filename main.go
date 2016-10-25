@@ -36,7 +36,6 @@ var routes = map[string]fasthttp.RequestHandler{
 	"/api":   apiHandler,
 	"/image": imageHandler,
 	"/blog":  blogHandler,
-	// audioHandler
 }
 
 func router(path string, ctx *fasthttp.RequestCtx) bool {
@@ -110,11 +109,6 @@ func main() {
 		"",
 	)
 	flag.Parse()
-
-	var err error
-	db, err = sql.Open("mysql", "root@/caffochoco")
-	checkErr(err)
-	defer db.Close()
 
 	listenAddr := fmt.Sprintf("%s:%d", addr, port)
 	log.Println("listening on", listenAddr)
