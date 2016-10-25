@@ -39,24 +39,25 @@
 }
 (function(){
 
-var Z = {
-    createdCallback: function() {
-        //called when a custom element is created.
+        var Z = {
+            createdCallback: function() {
+                //called when a custom element is created.
 
-        fetch('/api/blog')
-            .then((response) => response.json())
-            .then((j) => {
-                j.blog.forEach((blog) => {
-                    this.insertAdjacentHTML("beforeend", `<h1><a href="/blog/${blog.url}">${blog.title}</a></h1>`);
-                });
-            });
+                fetch('/api/blog')
+                    .then((response) => response.json())
+                    .then((j) => {
+                        this.innerHTML = "";
+                        j.blog.forEach((blog) => {
+                            this.insertAdjacentHTML("beforeend", `<h1><a href="/blog/${blog.url}">${blog.title}</a></h1>`);
+                        });
+                        this.insertAdjacentHTML("beforeend", `<a href="/blog" class="cta">more words &rarr;</a>`);
+                    });
 
-        //almost always required 
-        this.appendChild(this.template.content.cloneNode(true));
+                //almost always required 
+                this.appendChild(this.template.content.cloneNode(true));
+            },
 
-    },
-
-};
+        };
     
 Register("CaffoBlog", "caffo-blog", Z, "<em>(not loaded yet)</em>");
 })();

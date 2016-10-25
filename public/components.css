@@ -1,0 +1,49 @@
+caffo-blog {
+  box-shadow: 0 0 33px rgba(0, 0, 0, 0.3);
+  background: #fff;
+  text-align: left;
+  padding: 28px;
+  display: block; }
+
+caffo-blog h1 {
+  font-family: "tisa-regular" !important;
+  letter-spacing: -.6px;
+  font-size: 28px;
+  line-height: 1.58;
+  color: #404c56;
+  margin-bottom: 1em; }
+
+caffo-blog a {
+  text-decoration: none; }
+
+caffo-blog h1 a {
+  background: linear-gradient(to bottom, currentColor 50%, currentColor 50%);
+  background-size: 1px 2px;
+  background-repeat: repeat-x;
+  /* background-position: 0 1.1667em; */
+  background-position: 0 1.1em;
+  text-shadow: -1px 0px 0 white,0px -1px 0 white,0px 0px 0 white,0px 1px 0 white,1px 0px 0 white; }
+
+caffo-blog h1 a:hover {
+  background-position: 0 2em; }
+
+caffo-blog a.cta {
+  background: #404c56;
+  color: #fff;
+  font-weight: bold;
+  padding: 1em 2em;
+  display: inline-block;
+  float: right;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 2px;
+  letter-spacing: 1px;
+  box-shadow: 0 10px 10px -8px rgba(0, 0, 0, 0.8); }
+
+caffo-blog a.cta:hover {
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  transform: translateY(-1px); }
+
+caffo-blog a.cta:active {
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+  transform: translateY(1px); }
