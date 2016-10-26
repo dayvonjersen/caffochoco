@@ -60,4 +60,70 @@
         };
     
 Register("CaffoBlog", "caffo-blog", Z, "<em>(not loaded yet)</em>");
+})();(function(){
+
+var Z = {
+    createdCallback: function() {
+        //called when a custom element is created.
+
+        fetch("https://api.github.com/users/generaltso/repos?per_page=100")
+            .then((response) => response.json())
+            .then((ghRepos) => {
+                let stars = [];
+                ghRepos.forEach((repo, i) => {
+                    //if(repo.stargazers_count) 
+                    if(!repo.fork)
+                        stars.push([repo.stargazers_count, i]);
+                });
+                stars.sort((a,b)=>a[0]-b[0]).reverse();
+                let list = "";
+                stars.forEach((s, i) => {
+                    //if(i > 5) return;
+                    let repo = ghRepos[s[1]];
+                    list += `
+                        <li>
+                            <a href="${repo.html_url}" target="_blank">
+                                <div>
+                                    <span>${repo.name}</span>
+                                    <small>${repo.language}
+                                    ${s[0] ? `&nbsp;&bull;&nbsp;${s[0]} star${s[0]==1?'':'s'}` : ''}
+                                    ${repo.forks ? `&nbsp;&bull;&nbsp;${repo.forks} fork${repo.forks==1?'':'s'}` : ''}</small>
+                                </div>
+                                <small>${repo.description || "<em>no description</em>"}</small>
+                            </a>
+                        </li>`;
+                });
+                this.innerHTML = `<ol>${list}</ol>
+                    <a href="https://github.com/generaltso" target="_blank" class="cta">
+                    <svg height="28" version="1.1" viewBox="0 0 16 16" width="28">
+                        <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+                    </svg>follow me on github</a>`;
+            
+            });
+        //almost always required 
+        this.appendChild(this.template.content.cloneNode(true));
+
+        //xxx:workaround for implementation differences
+        this.initialized = true;
+        //xxx:/workaround
+    },
+    attachedCallback: function() {
+        //xxx:workaround for implementation differences
+        if(!this.initialized) this.createdCallback();
+        //xxx:/workaround
+
+        //called when a custom element is inserted into a DOM subtree.
+    },
+    detachedCallback: function() {
+        //called when a custom element is removed from a DOM subtree.
+    },
+    attributeChangedCallback: function(attributeName) {
+        //called when a custom element's attribute value has changed.
+    },
+    childListChangedCallback: function(removedNodes, addedNodes) {
+        //called when a user of your element updates its DOM children.
+    }
+};
+    
+Register("CaffoGithub", "caffo-github", Z, "");
 })();

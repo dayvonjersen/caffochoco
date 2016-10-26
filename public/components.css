@@ -47,3 +47,65 @@ caffo-blog a.cta:hover {
 caffo-blog a.cta:active {
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
   transform: translateY(1px); }
+caffo-github {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; }
+
+caffo-github a {
+  text-decoration: none; }
+
+caffo-github small {
+  font-size: 14px;
+  display: block;
+  line-height: 1.3; }
+
+caffo-github ol {
+  padding: 0 1em;
+  height: 66vh;
+  overflow: auto; }
+
+caffo-github li {
+  cursor: pointer;
+  margin: 2em 0;
+  padding: 1em;
+  background: rgba(0, 0, 0, 0.95);
+  color: #fff;
+  box-shadow: 0 0 33px -22px white; }
+  caffo-github li div {
+    border-bottom: 2px solid rgba(57, 57, 57, 0.08);
+    margin-bottom: 9px; }
+    caffo-github li div small {
+      float: right; }
+    caffo-github li div span {
+      color: #00b5fb;
+      font-weight: bold;
+      text-decoration: none; }
+  caffo-github li:hover div span {
+    text-decoration: underline; }
+
+caffo-github a.cta {
+  background-color: #393939;
+  color: #000;
+  font-weight: bold;
+  padding: 1em 2em;
+  display: inline-block;
+  float: right;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 2px;
+  letter-spacing: 1px;
+  box-shadow: 0 10px 10px -8px rgba(255, 255, 255, 0.2);
+  transform: translateY(-50%); }
+  caffo-github a.cta svg {
+    vertical-align: middle;
+    margin-right: .3em;
+    fill: currentColor; }
+
+caffo-github a.cta:hover {
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+  transform: translateY(-50%) translateY(-1px); }
+
+caffo-github a.cta:active {
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+  transform: translateY(-50%) translateY(1px); }

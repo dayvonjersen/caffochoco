@@ -107,6 +107,12 @@
                             let rect = sessionsCtn.getBoundingClientRect();
                             requestAnimationFrame(()=>sessionsCtn.style.backgroundPosition = `50% ${ map(-1*(rect.bottom - rect.height), -rect.height, rect.height, -8, 8) }vh`);
                         });
+                        let codeCtn = document.querySelector("#code");
+                        window.addEventListener("scroll", () => {
+                            let rect = codeCtn.getBoundingClientRect();
+                            requestAnimationFrame(()=>codeCtn.style.backgroundPosition = `50% ${ map(-1*(rect.bottom - rect.height), -rect.height, rect.height, -8, 8) }vh`);
+                        });
+
 
                     };
                 </script>
@@ -134,11 +140,11 @@
                 <style scoped>
                     @import url("image/code.png.css");
                 </style>
-                <div class="left vibrant">
+                <div class="left" style="background:rgb(0, 181, 251);color:#fff">
                     <h1>code</h1>
                 </div>
-                <div class="right">
-                    
+                <div class="right" style="align-self:flex-end">
+                    <caffo-github></caffo-github>
                 </div>
             </section>
             <section id="words"
