@@ -3,7 +3,7 @@
     <head>
         <meta charset='utf-8'>
         <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-        <title>dayvonjersen.com</title>
+        <title>day von jersen dot com</title>
         <link rel='stylesheet' href='/style.css'>
         <link rel='stylesheet' href='/components.css'>
         <script src='/components.js'></script>
@@ -107,19 +107,19 @@
                             let rect = sessionsCtn.getBoundingClientRect();
                             requestAnimationFrame(()=>sessionsCtn.style.backgroundPosition = `50% ${ map(-1*(rect.bottom - rect.height), -rect.height, rect.height, -8, 8) }vh`);
                         });
-                        let codeCtn = document.querySelector("#code");
+                        /*let codeCtn = document.querySelector("#code");
                         window.addEventListener("scroll", () => {
                             let rect = codeCtn.getBoundingClientRect();
                             requestAnimationFrame(()=>codeCtn.style.backgroundPosition = `50% ${ map(-1*(rect.bottom - rect.height), -rect.height, rect.height, -8, 8) }vh`);
-                        });
-
-
+                        });*/
                     };
                 </script>
                 <div class="left darkmuted">
                     <h1>mixes</h1>
                 </div>
-                <div class="right">&nbsp;</div>
+                <div class="right">
+                    <iframe width="100%" height="180" src="https://www.mixcloud.com/widget/iframe/?feed=https%3A%2F%2Fwww.mixcloud.com%2Fdayvonjersen%2F&hide_cover=1&light=1" frameborder="0"></iframe>
+                </div>
             </section>
             <section id="tracks"
                 class="muted"
@@ -135,15 +135,15 @@
                 </div>
             </section>
             <section id="code"
-                class="muted"
-                style="background-image:url(image/code.png)">
+                class="darkmuted"
+                style="background-image:url(image/code.png);background-position:center">
                 <style scoped>
                     @import url("image/code.png.css");
                 </style>
                 <div class="left" style="background:rgb(0, 181, 251);color:#fff">
                     <h1>code</h1>
                 </div>
-                <div class="right" style="align-self:flex-end">
+                <div class="right">
                     <caffo-github></caffo-github>
                 </div>
             </section>

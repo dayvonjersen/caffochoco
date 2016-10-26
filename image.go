@@ -37,7 +37,7 @@ func imageHandler(ctx *fasthttp.RequestCtx) {
 .%s {
 	background-color: %s;
 	color: %s;
-	box-shadow: 0 0 10px rgba(%d,%d,%d,1); 
+/*	box-shadow: 0 0 10px rgba(%d,%d,%d,1); */
 }`, strings.ToLower(swatch.Name), c, c.TitleTextColor(), r, g, b)
 		}
 	} else if path == "./image/" || !fileExists(path) {
