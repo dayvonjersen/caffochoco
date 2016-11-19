@@ -7,6 +7,7 @@ import (
 	"os"
 	"path/filepath"
 	"regexp"
+	"sort"
 	"strconv"
 	"strings"
 	"time"
@@ -62,7 +63,13 @@ func getBlog(path string) string {
 	return blog
 }
 
-var tocCache []*blogPost
+type blogs []*blogPost
+
+func (b blogs) Len() int           { return len(b) }
+func (b blogs) Swap(i, j int)      { b[i], b[j] = b[j], b[i] }
+func (b blogs) Less(i, j int) bool { return b[i].Date.Before(b[j].Date) }
+
+var tocCache blogs
 
 func getTocData() []*blogPost {
 	if !nocache && tocCache != nil {
@@ -79,6 +86,7 @@ func getTocData() []*blogPost {
 		}
 		return nil
 	})
+	sort.Sort(sort.Reverse(blogs(data)))
 	return data
 }
 
