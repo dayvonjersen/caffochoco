@@ -37,21 +37,6 @@
 
         <main>
             <section id="intro">
-                <style>
-                    main > section:nth-child(2n) {
-                        background-attachment: fixed;
-                    }
-                    section#intro {
-                        background-image: url(image/awesome.png);
-                        background-size: 50%;
-                        background-repeat: no-repeat;
-                        background-position: 100% 100vh;
-                        transition: all 10ms linear;
-                    }
-                    section#intro header {
-                        color: #000;
-                    }
-                </style>
                 <script defer>
                     window.addEventListener('load', () => { 
                         let introCtn = document.querySelector("#intro");
@@ -78,7 +63,37 @@
                 class="muted"
                 style="background-image:url(image/pexels-photo-29346.jpg)">
                 <style scoped>
-                    @import url("/image/pexels-photo-29346.jpg.css");
+/*                    @import url("/image/pexels-photo-29346.jpg.css");*/
+.lightvibrant {
+        background-color: #d0bc9b;
+        color: #000000;
+/*      box-shadow: 0 0 10px rgba(208,188,155,1); */
+}
+.darkvibrant {
+        background-color: #61672a;
+        color: #ffffff;
+/*      box-shadow: 0 0 10px rgba(97,103,42,1); */
+}
+.muted {
+        background-color: #948a53;
+        color: #ffffff;
+/*      box-shadow: 0 0 10px rgba(148,138,83,1); */
+}
+.lightmuted {
+        background-color: #cec1a9;
+        color: #000000;
+/*      box-shadow: 0 0 10px rgba(206,193,169,1); */
+}
+.darkmuted {
+        background-color: #515929;
+        color: #ffffff;
+/*      box-shadow: 0 0 10px rgba(81,89,41,1); */
+}
+.vibrant {
+        background-color: #88932d;
+        color: #ffffff;
+/*      box-shadow: 0 0 10px rgba(136,147,45,1); */
+}
                 </style>
                 <div class="left">&nbsp;</div>
                 <div class="right vibrant">
@@ -89,13 +104,27 @@
                 class="darkmuted"
                 style="background-image:url(image/djr.jpg); background-attachment: fixed">
                 <style scoped>
-                    @import url("image/djr.jpg.css");
-                </style>
-                <style>
-                    section#sessions {
-                        background-position: 0 0;
-                        transition: all 10ms linear;
-                    }
+/*                    @import url("image/djr.jpg.css");*/
+.darkmuted {
+        background-color: #4a2a5c;
+        color: #ffffff;
+/*      box-shadow: 0 0 10px rgba(74,42,92,1); */
+}
+.vibrant {
+        background-color: #24e200;
+        color: #000000;
+/*      box-shadow: 0 0 10px rgba(36,226,0,1); */
+}
+.lightvibrant {
+        background-color: #b9e07f;
+        color: #000000;
+/*      box-shadow: 0 0 10px rgba(185,224,127,1); */
+}
+.darkvibrant {
+        background-color: #926503;
+        color: #ffffff;
+/*      box-shadow: 0 0 10px rgba(146,101,3,1); */
+}
                 </style>
                 <script defer>
                     function map(num, in_min, in_max, out_min, out_max) {
@@ -125,7 +154,39 @@
                 class="muted"
                 style="background-image:url(image/mixer.jpg)">
                 <style scoped>
-                    @import url("image/mixer.jpg.css");
+/*                    @import url("image/mixer.jpg.css");*/
+
+.vibrant {
+        background-color: #f66008;
+        color: #ffffff;
+/*      box-shadow: 0 0 10px rgba(246,96,8,1); */
+}
+.lightvibrant {
+        background-color: #f9898a;
+        color: #000000;
+/*      box-shadow: 0 0 10px rgba(249,137,138,1); */
+}
+.darkvibrant {
+        background-color: #063787;
+        color: #ffffff;
+/*      box-shadow: 0 0 10px rgba(6,55,135,1); */
+}
+.muted {
+        background-color: #558497;
+        color: #ffffff;
+/*      box-shadow: 0 0 10px rgba(85,132,151,1); */
+}
+.lightmuted {
+        background-color: #b7d4d2;
+        color: #000000;
+/*      box-shadow: 0 0 10px rgba(183,212,210,1); */
+}
+.darkmuted {
+        background-color: #11191c;
+        color: #ffffff;
+/*      box-shadow: 0 0 10px rgba(17,25,28,1); */
+}
+
                 </style>
                 <div class="left">
                     <iframe width="100%" height="450" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/users/233217&amp;color=ff5500&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false"></iframe>
@@ -136,9 +197,26 @@
             </section>
             <section id="code"
                 class="darkmuted"
-                style="background-image:url(image/code.png);background-position:center">
+                style="background-image:url(image/code.png);background-position:center;background-color: #090e13;">
                 <style scoped>
-                    @import url("image/code.png.css");
+/*                    @import url("image/code.png.css");*/
+
+.darkvibrant {
+        background-color: #010e19;
+        color: #ffffff;
+/*      box-shadow: 0 0 10px rgba(1,14,25,1); */
+}
+.darkmuted {
+        background-color: #090e13;
+        color: #ffffff;
+/*      box-shadow: 0 0 10px rgba(9,14,19,1); */
+}
+. {
+        background-color: #0a89f5;
+        color: #ffffff;
+/*      box-shadow: 0 0 10px rgba(10,137,245,1); */
+}
+
                 </style>
                 <div class="left" style="background:rgb(0, 181, 251);color:#fff">
                     <h1>code</h1>
@@ -151,7 +229,38 @@
                 class="muted"
                 style="background-image:url(image/pexels-photo-45718.jpg)">
                 <style scoped>
-                    @import url("image/pexels-photo-45718.jpg.css");
+/*                    @import url("image/pexels-photo-45718.jpg.css");*/
+.lightmuted {
+        background-color: #cfd3bf;
+        color: #000000;
+/*      box-shadow: 0 0 10px rgba(207,211,191,1); */
+}
+.darkmuted {
+        background-color: #8f754a;
+        color: #ffffff;
+/*      box-shadow: 0 0 10px rgba(143,117,74,1); */
+}
+.vibrant {
+        background-color: #b09855;
+        color: #ffffff;
+/*      box-shadow: 0 0 10px rgba(176,152,85,1); */
+}
+.lightvibrant {
+        background-color: #b5a465;
+        color: #000000;
+/*      box-shadow: 0 0 10px rgba(181,164,101,1); */
+}
+.muted {
+        background-color: #a38d5c;
+        color: #ffffff;
+/*      box-shadow: 0 0 10px rgba(163,141,92,1); */
+}
+. {
+        background-color: #5b4e2a;
+        color: #ffffff;
+/*      box-shadow: 0 0 10px rgba(91,78,42,1); */
+}
+
                 </style>
                 <div class="left">
                     <caffo-blog></caffo-blog>

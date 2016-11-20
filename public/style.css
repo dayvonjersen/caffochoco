@@ -366,6 +366,24 @@ section .right {
         flex-basis: 100%;
     }
 }
+
+main > section:nth-child(2n) {
+    background-attachment: fixed;
+}
+section#intro {
+    background-image: url(image/awesome.png);
+    background-size: 50%;
+    background-repeat: no-repeat;
+    background-position: 100% 100vh;
+    transition: all 10ms linear;
+}
+section#intro header {
+    color: #000;
+}
+section#sessions {
+    background-position: 0 0;
+    transition: all 10ms linear;
+}
 /**
  * }}}
  */
