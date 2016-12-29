@@ -84,7 +84,6 @@
 
             ul, ol {
                 list-style-position: outside;
-                text-indent: .25em;
             }
             li p {
                 margin: 0;
@@ -124,6 +123,49 @@
                 display: flex;
                 justify-content: space-between;
             }
+
+            figure {
+                width: 100%;
+                max-height: 20em;
+                box-shadow: 0 0 1px;
+            }
+            figure:hover {
+                box-shadow: 0 0 44px;
+            }
+            figure img {
+                width: 100%;
+                max-height: 20em;
+                object-fit: cover;
+                display: block;
+            }
+            figcaption {
+                text-align: center;
+                font-size: 0.6667em;
+                margin-top: .3333em;
+            }
+
+            a[href].litebox {
+                background: none;
+                color: inherit;
+            }
+
+            .lightbox {
+                display: none;
+                position: fixed;
+                z-index: 999;
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                background: rgba(0,0,0,0.8) !important;
+            }
+
+            .lightbox:target {
+                outline: none;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
         </style>
         <script>
             function readtime(articleSelector) {
@@ -154,6 +196,20 @@ window.addEventListener("DOMContentLoaded", () => {
     let blogdate = document.querySelector("#blogdate");
     blogdate.innerHTML = fdate(new Date(blogdate.textContent.trim()));
     blogdate.innerHTML += `<small>&ensp;</small>${readtime("#blogblog")} min read`;
+
+    [].forEach.call(document.querySelectorAll("img"), (img, i) => {
+        img.outerHTML = `
+            <a name="#_${i}"></a>
+            <a href="#img${i}" class="litebox">
+            <figure>
+                <img src="${img.src}" alt="${img.alt}">
+                <figcaption>${img.alt}</figcaption>
+            </figure>
+        </a>
+        <a href="#_${i}" class="lightbox" id="img${i}">
+            <img src="${img.src}" alt="${img.alt}">
+        </a>`;
+    });
 });
 </script>
 
