@@ -18,10 +18,10 @@ caffo-blog a {
 
 caffo-blog h1 a {
   background: linear-gradient(to bottom, currentColor 50%, currentColor 50%);
-  background-size: 1px 2px;
+  background-size: 1px 1px;
   background-repeat: repeat-x;
   /* background-position: 0 1.1667em; */
-  background-position: 0 1.1em;
+  background-position: 0 1em;
   text-shadow: -1px 0px 0 white,0px -1px 0 white,0px 0px 0 white,0px 1px 0 white,1px 0px 0 white; }
 
 caffo-blog h1 a:hover {

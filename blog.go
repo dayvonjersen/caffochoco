@@ -121,16 +121,17 @@ func blogHandler(ctx *fasthttp.RequestCtx) {
 var re = *regexp.MustCompile(`(?i)(title|date|intro|tags|status|toc|position):(.+)`)
 
 type blogPost struct {
-	Title     string    `json:"title"`
-	Date      time.Time `json:"date"`
-	Dateisset bool      `json:"-"`
-	Intro     string    `json:"intro"`
-	Tags      []string  `json:"tags"`
-	Status    int       `json:"status"`
-	Toc       bool      `json:"toc"`
-	Position  int       `json:"position"`
-	Blog      string    `json:"blog"`
-	Url       string    `json:"url"`
+	Title          string    `json:"title"`
+	Date           time.Time `json:"date"`
+	Dateisset      bool      `json:"-"`
+	Intro          string    `json:"intro"`
+	Tags           []string  `json:"tags"`
+	Status         int       `json:"status"`
+	Toc            bool      `json:"toc"`
+	Position       int       `json:"position"`
+	Blog           string    `json:"blog"`
+	Url            string    `json:"url"`
+	Previous, Next *blogPost
 }
 
 func parseMetadata(blogBytes []byte) (*blogPost, []byte) {
@@ -175,8 +176,20 @@ func parseMetadata(blogBytes []byte) (*blogPost, []byte) {
 	return ret, buf.Bytes()
 }
 func parseBlog(blogBytes []byte) *blogPost {
-	ret, blog := parseMetadata(blogBytes)
-	unsafe := blackfriday.MarkdownCommon(blog)
-	ret.Blog = string(unsafe)
-	return ret
+	blog, blogText := parseMetadata(blogBytes)
+	unsafe := blackfriday.MarkdownCommon(blogText)
+	blog.Blog = string(unsafe)
+	toc := getTocData()
+	for i, b := range toc {
+		if blog.Title == b.Title {
+			if i > 0 {
+				blog.Previous = toc[i-1]
+			}
+			if i+1 < len(toc) {
+				blog.Next = toc[i+1]
+			}
+			break
+		}
+	}
+	return blog
 }

@@ -1,6 +1,14 @@
 <style>
     @import "/font/fonts.css";
-    @import "/medium-underline.css";
+a[href], ins, u {
+    text-decoration: none;
+    background: linear-gradient(to bottom, currentColor 50%, currentColor 50%);
+    background-size: 1px 2px;
+    background-repeat: repeat-x;
+    /* background-position: 0 1.1667em; */
+    background-position: 0 1.1em;
+    text-shadow: -1px 0px 0 white,0px -1px 0 white,0px 0px 0 white,0px 1px 0 white,1px 0px 0 white;
+}
 
     article {
         margin: 90px 100px;
@@ -19,7 +27,7 @@
 
     article header span {
         color: #f49d00;
-        margin-right: 1em;
+        margin-right: .5em;
     }
 
     article a {
@@ -82,7 +90,7 @@
         <div style='overflow-y:auto'>
             {{range .}} 
             <article>
-                <header>{{if .Dateisset}}<time>{{.Date.Format "January 2006"}}</time><small>&#x202F;&bull;&#x202F;</small>{{end}}{{range .Tags}}<span>{{.}}</span>{{end}}</header>
+                <header>{{if .Dateisset}}<time>{{.Date.Format "January 2006"}}</time><small>&nbsp;&nbsp;&nbsp;&bull;&nbsp;&nbsp;&nbsp;</small>{{end}}{{range .Tags}}<span>{{.}}</span>{{end}}</header>
                 <a href="/blog/{{.Url}}">{{.Title}}</a>
             </article>	
             {{end}}
