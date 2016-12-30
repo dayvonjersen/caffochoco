@@ -7,6 +7,9 @@
             @import "/prism.css";
             @import "/medium-underline.css";
 
+            ::selection { background-color: #ffef00; color: #333; text-shadow: none; }
+            ::-webkit-selection { background-color: #ffef00; color: #333; text-shadow: none; }
+            ::-moz-selection { background-color: #ffef00; color: #333; text-shadow: none; }
 
             h1, h2, h3, h4, h5, h6 {
                 font-family: "tisa-regular";
@@ -92,11 +95,13 @@
             code, pre {
                 font-family: "operator-book";
                 font-size: 15px;
+                background-color: #eeeeef;
             }
             blockquote {
                 padding: 0 0.8333em;
                 margin-left: -0.8333em;
-                border-left: .3333em #d1d1d1 solid;
+                border-left: 4px #d1d1d1 solid;
+                background: linear-gradient(90deg, rgba(209, 209, 209, 0.09) 0%, transparent 100%);
             }
             hr {
                 border: 0;
@@ -130,7 +135,7 @@
                 box-shadow: 0 0 1px;
             }
             figure:hover {
-                box-shadow: 0 0 44px;
+                box-shadow: 0 0 44px -22px;
             }
             figure img {
                 width: 100%;
@@ -219,7 +224,7 @@ window.addEventListener("DOMContentLoaded", () => {
         <header>
             <h1>{{.Title}}</h1>
             <blockquote>
-                <div>by <a href="https://dayvonjersen.com/"><strong>dayvonjersen</strong></a></div>
+                <div>by <a href="https://dayvonjersen.com/" style="background:none"><strong>dayvonjersen</strong></a></div>
                 <div>
                 {{if .Dateisset}}
                     <span id='blogdate' title='{{.Date.Format "Monday, January _2 2006 at 3:04PM MST"}}'
