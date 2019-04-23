@@ -6,3 +6,4 @@ blog/
 public/font/
 public/webfont/
 image/
+*.pem
