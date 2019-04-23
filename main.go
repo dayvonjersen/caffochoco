@@ -4,8 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"log"
-
-	"github.com/valyala/fasthttp"
+	"net/http"
 )
 
 var (
@@ -61,23 +60,35 @@ func main() {
 	listenAddr := fmt.Sprintf("%s:%d", addr, port)
 	if nossl {
 		log.Println("listening on", listenAddr)
-		log.Fatalln(fasthttp.ListenAndServe(listenAddr, requestHandler))
+		http.HandleFunc("/", requestHandler)
+		log.Fatalln(http.ListenAndServe(listenAddr, nil))
 	}
 
 	// redirect http traffic to https
 	log.Println("listening on", addr+":80")
-	go fasthttp.ListenAndServe(addr+":80", func(ctx *fasthttp.RequestCtx) {
-		ctx.Response.Header.SetStatusCode(fasthttp.StatusTemporaryRedirect)
-		ctx.Response.Header.Set(
-			"Location",
-			fmt.Sprintf("https://%s:%d%s",
-				string(ctx.Request.Host()),
-				port,
-				string(ctx.Path()),
-			),
-		)
-	})
+	go func() {
+		mux := http.NewServeMux()
+		mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+			w.Header().Set(
+				"Location",
+				fmt.Sprintf("https://%s:%d%s",
+					hostAddr(r),
+					port,
+					r.URL,
+				),
+			)
+			w.WriteHeader(http.StatusTemporaryRedirect)
+			fmt.Println("hello??")
+		})
+
+		s := &http.Server{
+			Addr:    ":80",
+			Handler: mux,
+		}
+		s.ListenAndServe()
+	}()
 
 	log.Println("listening on", listenAddr)
-	log.Fatalln(fasthttp.ListenAndServeTLS(listenAddr, certFile, keyFile, requestHandler))
+	http.HandleFunc("/", requestHandler)
+	log.Fatalln(http.ListenAndServeTLS(listenAddr, certFile, keyFile, nil))
 }

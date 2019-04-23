@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"fmt"
 	"io/ioutil"
+	"net/http"
 	"os"
 	"path/filepath"
 	"regexp"
@@ -14,7 +15,6 @@ import (
 
 	"github.com/russross/blackfriday"
 	"github.com/shibukawa/git4go"
-	"github.com/valyala/fasthttp"
 )
 
 const (
@@ -103,19 +103,19 @@ func getToc() string {
 	return toc
 }
 
-func blogHandler(ctx *fasthttp.RequestCtx) {
-	ctx.Response.Header.Set("Content-Type", "text/html; charset=UTF-8")
-	path := strings.TrimPrefix(string(ctx.Path()), "/blog")
+func blogHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "text/html; charset=UTF-8")
+	path := strings.TrimPrefix(r.URL.Path, "/blog")
 	if path == "" || path == "/" {
-		fmt.Fprint(ctx, getToc())
+		fmt.Fprint(w, getToc())
 		return
 	}
 	path = BLOG_DIR + path + ".md"
 	if !fileExists(path) {
-		notfoundHandler(ctx)
+		notfoundHandler(w, r)
 		return
 	}
-	fmt.Fprint(ctx, getBlog(path))
+	fmt.Fprint(w, getBlog(path))
 }
 
 var re = *regexp.MustCompile(`(?i)(title|date|intro|tags|status|toc|position):(.+)`)

@@ -3,10 +3,9 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"net/http"
 	"regexp"
 	"strings"
-
-	"github.com/valyala/fasthttp"
 )
 
 type apiRoute struct {
@@ -18,10 +17,10 @@ var apiRoutes = []*apiRoute{
 	&apiRoute{re: regexp.MustCompile(`^/blog`), fn: blog},
 }
 
-func apiHandler(ctx *fasthttp.RequestCtx) {
-	path := strings.TrimPrefix(string(ctx.Path()), "/api")
+func apiHandler(w http.ResponseWriter, r *http.Request) {
+	path := strings.TrimPrefix(r.URL.Path, "/api")
 
-	ctx.Response.Header.Set("Content-Type", "application/json; charset=UTF-8")
+	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 
 	var ret map[string]interface{}
 	for _, route := range apiRoutes {
@@ -31,13 +30,13 @@ func apiHandler(ctx *fasthttp.RequestCtx) {
 		}
 	}
 	if ret == nil {
-		ctx.Response.SetStatusCode(404)
+		w.WriteHeader(404)
 		ret = map[string]interface{}{"error": 404}
 	}
 
 	b, err := json.MarshalIndent(ret, "", "    ")
 	checkErr(err)
-	fmt.Fprintf(ctx, string(b))
+	fmt.Fprintf(w, string(b))
 }
 
 func blog(params []string) map[string]interface{} {

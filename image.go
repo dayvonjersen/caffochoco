@@ -5,21 +5,21 @@ import (
 	"image"
 	_ "image/jpeg"
 	_ "image/png"
+	"net/http"
 	"os"
 	"strings"
 
 	"github.com/generaltso/vibrant"
-	"github.com/valyala/fasthttp"
 )
 
-var imageFSHandler = fasthttp.FSHandler("./image", 1)
+var imageFSHandler = http.StripPrefix("/image/", http.FileServer(http.Dir("./image")))
 
-func imageHandler(ctx *fasthttp.RequestCtx) {
-	path := "." + string(ctx.Path())
+func imageHandler(w http.ResponseWriter, r *http.Request) {
+	path := "." + r.URL.Path
 	if strings.HasSuffix(path, ".css") {
 		path = strings.TrimSuffix(path, ".css")
 		if !fileExists(path) {
-			notfoundHandler(ctx)
+			notfoundHandler(w, r)
 			return
 		}
 		f, err := os.Open(path)
@@ -29,11 +29,11 @@ func imageHandler(ctx *fasthttp.RequestCtx) {
 		checkErr(err)
 		palette, err := vibrant.NewPaletteFromImage(img)
 		checkErr(err)
-		ctx.Response.Header.Set("Content-Type", "text/css; charset=UTF-8")
+		w.Header().Set("Content-Type", "text/css; charset=UTF-8")
 		for _, swatch := range palette.ExtractAwesome() {
 			c := swatch.Color
 			r, g, b := c.RGB()
-			fmt.Fprintf(ctx, `
+			fmt.Fprintf(w, `
 .%s {
 	background-color: %s;
 	color: %s;
@@ -41,9 +41,9 @@ func imageHandler(ctx *fasthttp.RequestCtx) {
 }`, strings.ToLower(swatch.Name), c, c.TitleTextColor(), r, g, b)
 		}
 	} else if path == "./image/" || !fileExists(path) {
-		notfoundHandler(ctx)
+		notfoundHandler(w, r)
 	} else {
-		imageFSHandler(ctx)
+		imageFSHandler.ServeHTTP(w, r)
 	}
 
 }
