@@ -385,6 +385,23 @@ section#sessions {
     transition: all 10ms linear;
 }
 /**
- * }}}
+ * }}} shameless plug {{{
+ */
+#shameless-plug {
+    background: #fedd58;
+    padding: 1em;
+}
+#shameless-plug p {
+    max-width: 20em;
+    margin: auto;
+    font-weight: bold;
+    text-align: center;
+}
+#shameless-plug a {
+    font-weight: 900;
+    font-size: 1.667em;
+}
+/**
+ * }}} 
  */
 /* vim:set fdm=marker foldlevel=0: */
