@@ -285,44 +285,62 @@
                         font-weight: inherit;
                         text-anchor: middle;
                     }
-                    text a {
+                    text a,
+                    a text {
                         cursor: pointer;
                     }
-                    text a:hover {
+                    text a:hover,
+                    a:hover text {
                         text-decoration: underline;
                     }
                     #ft-email,
                     #ft-me {
                         fill: currentColor;
                     }
-                    text:hover #ft-email,
-                    #ft-at {
+                    text:hover #ft-email, #ft-at {
                         fill: rgba(0,0,0,0.05);
                     }
                     text:hover #ft-me,
                     text:hover #ft-at,
-                    text:hover a {
+                    text:hover a, 
+                    a:hover text {
                         fill: #00b5fb;
                         opacity: 1;
+                    }
+                    #twitter {
+                        display: block;
+                        width: 50%;
+                        margin: auto;
+                        text-align: center;
+                        position: relative;
+                    }                        
+                    #twitter img {
+                        height: 100%;
+                        position: absolute;
+                        top: 10%;
+                        left: -25%;
                     }
                 </style>
                 <script defer>
                     window.addEventListener("DOMContentLoaded", () => {
-                        var svgElement = document.querySelector("#fit-text");
-                        var resizeFn = function() {
-                            var textElement = svgElement.querySelector('text'),
-                            w = textElement.offsetWidth || textElement.getComputedTextLength(),
-                            h = textElement.offsetHeight || 24;
-                            svgElement.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
-                        };
-                        resizeFn();
-                        window.addEventListener('resize', resizeFn);
+                        [].forEach.call(document.querySelectorAll(".fit-text"), (svgElement) => {
+                            var resizeFn = function() {
+                                var textElement = svgElement.querySelector('text'),
+                                w = textElement.offsetWidth || textElement.getComputedTextLength(),
+                                h = textElement.offsetHeight || 24;
+                                svgElement.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+                            };
+                            resizeFn();
+                            window.addEventListener('resize', resizeFn);
+                        });
                     });
                 </script>
                 <div style="width:100%;padding:3.3333rem">
-                    <svg id="fit-text">
+                    <svg class="fit-text">
                         <text x="50%" y="20"><tspan id="ft-email">email</tspan> <a xlink:href="mailto:me@dayvonjersen.com?subject=hi"><tspan id="ft-me">me</tspan><tspan id="ft-at">@dayvonjersen.com</tspan></a></text>
                     </svg>
+                    <a id="twitter" href="https://twitter.com/dayvonjersen" target="_blank"><img src="/image/twitter.png">
+                        <svg class="fit-text"><text x="50%" y="20">@dayvonjersen</</text></svg></a>
                 </div>
             </section>
         </main>
