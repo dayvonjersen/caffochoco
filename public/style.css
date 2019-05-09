@@ -391,15 +391,32 @@ section#sessions {
     background: #fedd58;
     padding: 1em;
 }
-#shameless-plug p {
-    max-width: 20em;
-    margin: auto;
-    font-weight: bold;
+#shameless-plug p,
+#shamelesser-plug p {
+    /* max-width: 20em; */
+    /* margin: auto; */
+    /* font-weight: bold; */
     text-align: center;
 }
-#shameless-plug a {
+#shameless-plug a,
+#shamelesser-plug a {
     font-weight: 900;
     font-size: 1.667em;
+}
+#shamelesser-plug {
+    background: #6441A4;
+    background-image: url(/image/twitch.png);
+    background-repeat: no-repeat;
+    background-position: 1em 1em;
+    background-size: 3em;
+    color: #fff;
+    padding: 1em;
+}
+@media (max-width: 800px) {
+    #shamelesser-plug {
+        background-size: 1.1em;
+        background-position: 0.5em 50%;
+    }
 }
 /**
  * }}} 
