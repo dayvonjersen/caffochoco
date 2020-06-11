@@ -13,8 +13,6 @@ import (
 
 const STATIC_DIR = "./public"
 
-var staticHandler = http.StripPrefix("/", http.FileServer(http.Dir(STATIC_DIR)))
-
 // capture http response code sent because net/http is """good"""
 type logResponseWriter struct {
 	http.ResponseWriter
@@ -76,7 +74,7 @@ func requestHandler(ww http.ResponseWriter, r *http.Request) {
 		http.ServeFile(w, r, "./templates/index.html")
 	case router(path, w, r):
 	case fileExists(STATIC_DIR + path):
-		staticHandler.ServeHTTP(w, r)
+		http.ServeFile(w, r, STATIC_DIR+path)
 	default:
 		notfoundHandler(w, r)
 	}
