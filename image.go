@@ -9,7 +9,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/generaltso/vibrant"
+	"github.com/dayvonjersen/vibrant"
 )
 
 var imageFSHandler = http.StripPrefix("/image/", http.FileServer(http.Dir("./image")))
