@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "htmlparser2": "^3.9.1",
-    "node-sass": "^3.10.0",
+    "node-sass": "^4.14.1",
     "webcomponents.js": "^0.7.22"
   }
 }
