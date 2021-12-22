@@ -1,0 +1,190 @@
+<html>
+    <head>
+        <meta charset='utf-8'> <!-- fuck off firefox -->
+        <title>sci-fi beats to hack/the planet to</title>
+        <script><!--//26 years ago was over 9000 years ago--></script>
+        <script>let rand=(min,max)=>Math.floor(Math.random()*(max-min))+min;document.addEventListener("DOMContentLoaded",()=>{setInterval(()=>{
+let title=document.title;let substr='';let prevCp=title.codePointAt(0); let prevCc=title.charCodeAt(0);
+for(let c=1;c<title.length;c++){
+    let cp=title.codePointAt(c);let cc=title.charCodeAt(c);
+    if(cp>=65535||(cp<65535&&cp===cc&&prevCp===prevCc)){
+    substr+=String.fromCodePoint(cp);}
+    prevCp=cp;prevCc=cc}
+document.title=substr+(""["to"+(rand(0,2)?"Upp":"Low")+"erCase"].call(String.fromCodePoint(title.codePointAt(0))));},250);});</script>
+<style>
+body {
+    background: #000;
+    color: #090;
+    font-family: "Comic Sans MS", sans-serif;
+    user-select: none;
+    pointer-events: none;
+    text-shadow: 2px 2px 2px rgba(0,153,0,0.2);}
+a {
+    color: #090;
+    text-decoration: none;
+    pointer-events: auto;
+    transition: all 500ms;}
+a:hover, a:active { 
+    text-decoration: underline; 
+    text-shadow: 0 0 0 rgba(0,0,0,0);
+    color: #0ff;}
+td { text-align: center;}
+h1 { padding: 1em;}
+s { color: #900; text-shadow: 2px 2px 2px rgba(153,0,0,0.2)}
+table { 
+    margin: 1em 0 0 1em;
+    border-radius: 0 25px 0 0;
+    float: left;
+    box-shadow: 5px 5px 0 currentColor;
+    animation-delay: 30s;
+    animation: 1500ms rainbow infinite, 240s bounce linear infinite alternate;}
+a[href^="SECTOR_MAP"] {
+    color: #070707; 
+    float: right;
+    text-shadow: none;}
+table:nth-child(2n+1) { animation-direction:alternate-reverse;border-bottom-left-radius:25px;}
+@keyframes bounce {
+    50% { transform:translateX(-5%) translateY(5%);}
+    100% { transform:translateX(5%) translateY(-5%);}}
+@keyframes rainbow {
+    0% { color: #0ff;}
+    25% { color: #0f0;}
+    50% { color: #f0f;}
+    75% { color: #00f;}
+    100% { color: #ff0;}}
+.nowplaying { 
+    text-decoration: overline;
+    animation: rainbow 476ms infinite;}
+s {display:inline-block;position:relative;}
+s>a{position:absolute;bottom:0;left:0}
+th {
+    border: 5px outset #ccc ;
+    background: #aaa;
+}th:active{border: 5px inset #ccc;}th a {color: #f0f;}
+</style>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    let audioElement = document.querySelector("audio");
+    audioElement.loop = true;
+    audioElement.volume = 0.5;
+
+    let defaultTitle = document.title;
+
+    document.querySelectorAll("a[href='#']").forEach((anchorElement) => {
+        let wav = "a/" + anchorElement.textContent + ".mp3";
+        anchorElement.setAttribute("href", wav);
+        anchorElement.onclick = (e) => {
+            e.preventDefault();
+
+            if(anchorElement.classList.contains("nowplaying")) {
+                anchorElement.classList.remove("nowplaying");
+                audioElement.pause();
+                return;
+            }
+            document.title = 'LOADING >>>';
+            audioElement.src = wav;
+            audioElement.addEventListener('canplaythrough', () => {
+                document.title = defaultTitle;
+                audioElement.play();});
+
+            document.querySelectorAll(".nowplaying").forEach(element => element.classList.remove("nowplaying"));
+            anchorElement.classList.add("nowplaying");
+        };
+    });
+});
+</script>
+    </head>
+    <noscript><blink>THIS AUDIO/VISUAL EXPERIENCE REQUIRES JAVASCRIPT</blink>
+
+        <marquee direction="up" class="nowplaying">JUST TRUST ME
+
+        <marquee direction="down">DUMBFUCK <blink><marquee direction="right">:^)</marquee></blink></marquee></marquee><xmp></noscript>
+    <body>
+        <audio></audio>
+        <table border=1>
+            <tr>
+                <td><h1>
+                        <a href="#">0x0000</a> 
+                        <a href="#">0x0001</a> 
+                        <a href="#">0x0002</a> 
+                    </h1>
+                </td>
+            </tr>
+            <tr>
+                <th><font color="red">[<font>&nbsp;<a href="'sector 0x00'.torrent">&rarr;Download 'sector 0x00'.torrent &darr;&darr;&darr;</a>&nbsp;<font color="red">]</font></th>
+            </tr>
+        </table>
+        <table border=1>
+            <tr>
+                <td><h1>
+                        <a href="#">0x0100</a> 
+                        <a href="#">0x0101</a> 
+                        <s title='Free Listening on soundclown®'>0x0102<a href='https://soundcloud.com/dayvonjersen/0x102'><img src='v/soundcloud-80x15.png'></s> 
+                        <a href="#">0x0103</a> 
+                        <s title='Free Listening© on sound°±¶¹clown°±µ³'>0x0104<a href='https://soundcloud.com/dayvonjersen/0x104'><img src='v/soundcloud-80x15.png'></s> 
+                    </h1>
+                </td>
+            </tr>
+            <tr>
+                <th><font color="red">[</font>&nbsp;<a href="'sector 0x01'.torrent">&rarr;Download 'sector 0x01'.torrent &darr;&darr;&darr;</a>&nbsp;<font color="red">]</font></th>
+            </tr>
+        </table>
+        <table border=1>
+            <tr>
+                <td><h1>
+                        <a href="#">0x0200</a> 
+                        <a href="#">0x0201</a> 
+                        <a href="#">0x0202</a> 
+                        <a href="#">0x0203</a> 
+                    </h1>
+                </td>
+            </tr>
+            <tr>
+                <th><font color="red">[</font>&nbsp;<a href="'sector 0x02'.torrent">&rarr;Download 'sector 0x02'.torrent &darr;&darr;&darr;</a>&nbsp;<font color="red">]</font></th>
+            </tr>
+        </table>
+        <table border=1>
+            <tr>
+                <td><h1>
+                        <s title='Free™ Listening on sound°±¶¹clown°±µ³'>0x0300<a href='https://soundcloud.com/dayvonjersen/0x300'><img src='v/soundcloud-80x15.png'></s> 
+                    </h1>
+                </td>
+            </tr>
+            <tr>
+                <td><font color="red">[</font>&nbsp;<s>&rarr;Download 'sector 0x03'.torrent &darr;&darr;&darr;</s>&nbsp;<font color="red">]</font></td>
+            </tr>
+        </table>
+        <table border=1>
+            <tr>
+                <td><h1>
+                        <a href="#">0x0400</a> 
+                        <a href="#">0x0401</a> 
+                        <a href="#">0x0402</a> 
+                        <a href="#">0x0500</a> 
+                        <a href="#">0x0600</a> 
+                        <a href="#">0x0601</a> 
+                        <a href="#">0x0602</a> 
+                        <a href="#">0x0603</a> 
+                        <a href="#">0x0604</a> 
+                        <a href="#">0x0605</a> 
+                    </h1>
+                </td>
+            </tr>
+            <tr>
+                <th><font color="red">[</font>&nbsp;<a href="?????????????.torrent" onclick=event.preventDefault()>&rarr;Download 'sector 0x04|0x05|0x06'.torrent &darr;&darr;&darr;</a>&nbsp;<font color="red">]</font></th>
+            </tr>
+        </table>
+        <table border=1>
+            <tr>
+                <td><h1>
+                        <a href="#">0x0777</a> 
+                    </h1>
+                </td>
+            </tr>
+            <tr>
+                <th><font color="red">[</font>&nbsp;<a href="'31337'.torrent">&rarr;Download '31337'.torrent &darr;&darr;&darr;</a>&nbsp;<font color="red">]</font></th>
+            </tr>
+        </table>
+        <a href="SECTOR_MAP.nfo">It is dangerous to go alone, take this!</a>
+    </body>
+</html>
