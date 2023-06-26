@@ -1,9 +1,12 @@
 caffochoco
+*.exe
+*.com
 *.fasthttp.gz
 cmd/watch/watch
 node_modules/
 blog/
 public/font/
 public/webfont/
+public/*
 image/
 *.pem

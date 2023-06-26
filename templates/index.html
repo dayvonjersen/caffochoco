@@ -4,352 +4,109 @@
         <meta charset='utf-8'>
         <meta name='viewport' content='width=device-width, initial-scale=1.0'>
         <title>dayvonjersen dot com</title>
-        <link rel='stylesheet' href='/style.css'>
-        <link rel='stylesheet' href='/components.css'>
-        <script src='/components.js'></script>
     </head>
-    <body>
-        <header>
-            <nav class='navbar'>
-                <h1><a href="#" class='h1'><img src='image/awesome.png'>dayvonjersen</a></h1>
+<body>
+<style>
+    * { font: 10pt monospace; color: #2e2e2e} /*article { filter: grayscale(50%); }*/
+/*del { filter: invert(1); } ins { border-bottom: double; }*/ a:hover { text-decoration: none; }
+/*img { max-width: calc(100vw - 32px)*/
+img { width: 25px;}
+article { display: flex; flex-direction: row; flex-wrap: wrap; justify-content: center; align-items: center}
+del { display: none;}
+article > a { padding: 1em; text-align: center; align-self: end;}
+a:not(.day) h2 { opacity: 0; transition: 250ms opacity ease-in-out; position: absolute;} a:hover h2 { opacity: 1; }
+a.day section { width: calc(100vw - 2em) }
+sup { font-size: xx-small; }
+footer { position: fixed; bottom: 1em; right: 3em; }
+</style>
+<article>
+    <a class="day">
+        <section>
+            <img src="/image/awesome.png">
+            <h1>dayvonjersen</h1>
+            <h2>dave, from new jersey</h2>
+        </section>
+    </a>
+    <a target="_blank" href="https://www.youtube.com/channel/UCh7W-4ldhJzhhoOU2ZVPMVQ/videos">
+        <section>
+            <img src="/image/youtube.png">
+            <h1>youtube<sup>New!</sup></h1>
+            <h2><del>Ghosts of a Future Lost</del></h2>
+        </section>
+    </a>
+    <a target="_blank" href="https://dayvonjersen.bandcamp.com/" class="bandcamp">
+        <section>
+            <img src="/image/bandcamp.png">
+            <h1>bandcamp</h1>
+            <h2>a few tracks of mine <ins>that</ins> you can purchase</h2>
+        </section>
+    </a>
+    
+    <a target="_blank" href="https://soundcloud.com/dayvonjersen" class="soundcloud">
+        <section>
+            <img src="/image/soundcloud.png">
+            <h1>soundcloud</h1>
+            <h2>a <del>few </del>track<del>s</del> of mine <ins>which</ins> you <del>can</del><ins>may</ins> listen to</h2>
+        </section>
+    </a>
+    
+    <a target="_blank" href="https://music.dayvonjersen.com/" class="music">
+        <section>
+            <img src="/image/music.png">
+            <h1>music.dayvonjersen.com</h1>
+            <h2><del>all of my tracks that you can listen to and download for free</del></h2>
+        </section>
+    </a>
+     
+    <a target="_blank" href="https://www.mixcloud.com/dayvonjersen" class="mixcloud">
+        <section>
+            <img src="/image/mixcloud.png">
+            <h1>mixcloud</h1>
+            <h2><del>dj </del>sets<del> uploaded semi-regularly</del></h2>
+        </section>
+    </a>
+    
+    <a target="_blank" href="https://twitch.tv/dayvonjersen" class="twitch">
+        <section>
+            <img src="/image/twitch.png">
+            <h1>twitch</h1>
+            <h2><del>dj sets </del>broadcast<ins>s</ins><del>ed</del><del> semi-regularly</del></h2>
+        </section>
+    </a>
 
-                <a href='#' class='navbar-hamburger'>🍔</a>
-                <a href='#sessions' class='navbar-link'>dj</a>
-                <a href='#tracks' class='navbar-link'>producer</a>
-                <a href='#code' class='navbar-link'>coder</a>
-                <a href='#words' class='navbar-link'>blogger</a>
-                <a href='#contact' class='navbar-link'>person</a>
-            </nav>
-            <script defer>
-                window.addEventListener('load', () => {
-                    var navbarElement = document.querySelector('.navbar');
-                    var hamburgerElement = document.querySelector('.navbar-hamburger');
-                    hamburgerElement.addEventListener('click', (event) => {
-                        event.preventDefault();
-                        navbarElement.classList.toggle("navbar-expand");
-                    });
-                    [].forEach.call(document.querySelectorAll('.navbar-link'), (anchorElement) => {
-                        anchorElement.addEventListener('click', () => navbarElement.classList.remove('navbar-expand'));
-                    });
-                });
-            </script>
-            <div id="shameless-plug" title="these are only temporary i promise">
-                <p>Hey check out my entire backcatalog of <i>over</i> 100 original productions, remixes and mashups <b>free to listen + download</b> at <a href="https://music.dayvonjersen.com/" target="_blank">music.dayvonjersen.com</a></p>
-            </div>
-            <div id="shamelesser-plug" title="these are only temporary i promise">
-                <p>and <b>Every Friday at 3PM EST</b> I'm streaming a <b>DJ set</b> <i>live</i> on twitch!<br><a href="https://twitch.tv/dayvonjersen">twitch.tv/dayvonjersen</a>
-                </p>
-            </div>
-        </header>
+    <a target="_blank" href="https://github.com/dayvonjersen" class="github">
+        <section>
+            <img src="/image/github.png">
+            <h1>github</h1>
+            <h2>free abandonware</h2>
+        </section>
+    </a>
 
-        <main>
-            <section id="intro">
-                <script defer>
-                    window.addEventListener('load', () => { 
-                        let introCtn = document.querySelector("#intro");
-                        window.addEventListener("scroll", () => {
-                            let introHeight = introCtn.getBoundingClientRect().height;
-                            requestAnimationFrame(()=>introCtn.style.backgroundPosition = `100% ${(1 - window.scrollY/introHeight) * 100}vh`);
-                        });
+    <a target="_blank" href="/blog" class="blog">
+        <section>
+            <!-- <img src="/image/blog.png"> -->
+            <h1>blog</h1>
+            <h2>new articles posted hardly ever</h2>
+        </section>
+    </a>
+    
+    <a target="_blank" href="mailto:me@dayvonjersen.com" class="email">
+        <section>
+            <!-- <img src="/image/email.png"> -->
+            <h1>email</h1>
+            <h2>send me some spam</h2>
+        </section>
+    </a>
+    
+    <a target="_blank" href="https://twitter.com/dayvonjersen" class="birdsite">
+        <section>
+            <img src="/image/birdsite.png">
+            <h1>twitter</h1>
+            <h2>neither clever nor useful</h2>
+        </section>
+    </a> 
+</article>
 
-                        // compensate for fixed position header
-                        let navbar = document.querySelector(".navbar");
-                        window.addEventListener("hashchange", () => {
-                            if(!window.scrollY || window.scrollMaxY === window.scrollY) return;
-                            let navbarHeight = navbar.getBoundingClientRect().height;
-                            window.scrollBy(0, -1*navbarHeight);
-                        });
-                    });
-                </script>
-                <div class="left">
-                    <h1>So you have this person called <big>Dave</big>, <small>from New Jersey</small>...</h1>
-                </div>
-                <div class="right">&nbsp;</div>
-            </section>
-            <section id="recipes"
-                class="muted"
-                style="background-image:url(image/pexels-photo-29346.jpg)">
-                <style scoped>
-/*                    @import url("/image/pexels-photo-29346.jpg.css");*/
-.lightvibrant {
-        background-color: #d0bc9b;
-        color: #000000;
-/*      box-shadow: 0 0 10px rgba(208,188,155,1); */
-}
-.darkvibrant {
-        background-color: #61672a;
-        color: #ffffff;
-/*      box-shadow: 0 0 10px rgba(97,103,42,1); */
-}
-.muted {
-        background-color: #948a53;
-        color: #ffffff;
-/*      box-shadow: 0 0 10px rgba(148,138,83,1); */
-}
-.lightmuted {
-        background-color: #cec1a9;
-        color: #000000;
-/*      box-shadow: 0 0 10px rgba(206,193,169,1); */
-}
-.darkmuted {
-        background-color: #515929;
-        color: #ffffff;
-/*      box-shadow: 0 0 10px rgba(81,89,41,1); */
-}
-.vibrant {
-        background-color: #88932d;
-        color: #ffffff;
-/*      box-shadow: 0 0 10px rgba(136,147,45,1); */
-}
-                </style>
-                <div class="left">&nbsp;</div>
-                <div class="right vibrant">
-                    <h1>...who used to be a cook but is now serving up:</h1>
-                </div>
-            </section>
-            <section id="sessions"
-                class="darkmuted"
-                style="background-image:url(image/djr.jpg); background-attachment: fixed">
-                <style scoped>
-/*                    @import url("image/djr.jpg.css");*/
-.darkmuted {
-        background-color: #4a2a5c;
-        color: #ffffff;
-/*      box-shadow: 0 0 10px rgba(74,42,92,1); */
-}
-.vibrant {
-        background-color: #24e200;
-        color: #000000;
-/*      box-shadow: 0 0 10px rgba(36,226,0,1); */
-}
-.lightvibrant {
-        background-color: #b9e07f;
-        color: #000000;
-/*      box-shadow: 0 0 10px rgba(185,224,127,1); */
-}
-.darkvibrant {
-        background-color: #926503;
-        color: #ffffff;
-/*      box-shadow: 0 0 10px rgba(146,101,3,1); */
-}
-                </style>
-                <script defer>
-                    function map(num, in_min, in_max, out_min, out_max) {
-                        return (num - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
-                    };
-                    window.onload = () => { 
-                        let sessionsCtn = document.querySelector("#sessions");
-                        window.addEventListener("scroll", () => {
-                            let rect = sessionsCtn.getBoundingClientRect();
-                            requestAnimationFrame(()=>sessionsCtn.style.backgroundPosition = `50% ${ map(-1*(rect.bottom - rect.height), -rect.height, rect.height, -8, 8) }vh`);
-                        });
-                        /*let codeCtn = document.querySelector("#code");
-                        window.addEventListener("scroll", () => {
-                            let rect = codeCtn.getBoundingClientRect();
-                            requestAnimationFrame(()=>codeCtn.style.backgroundPosition = `50% ${ map(-1*(rect.bottom - rect.height), -rect.height, rect.height, -8, 8) }vh`);
-                        });*/
-                    };
-                </script>
-                <div class="left darkmuted">
-                    <h1>mixes</h1>
-                </div>
-                <div class="right">
-                    <iframe width="100%" height="180" src="https://www.mixcloud.com/widget/iframe/?feed=https%3A%2F%2Fwww.mixcloud.com%2Fdayvonjersen%2F&hide_cover=1&light=1" frameborder="0"></iframe>
-                </div>
-            </section>
-            <section id="tracks"
-                class="muted"
-                style="background-image:url(image/mixer.jpg)">
-                <style scoped>
-/*                    @import url("image/mixer.jpg.css");*/
-
-.vibrant {
-        background-color: #f66008;
-        color: #ffffff;
-/*      box-shadow: 0 0 10px rgba(246,96,8,1); */
-}
-.lightvibrant {
-        background-color: #f9898a;
-        color: #000000;
-/*      box-shadow: 0 0 10px rgba(249,137,138,1); */
-}
-.darkvibrant {
-        background-color: #063787;
-        color: #ffffff;
-/*      box-shadow: 0 0 10px rgba(6,55,135,1); */
-}
-.muted {
-        background-color: #558497;
-        color: #ffffff;
-/*      box-shadow: 0 0 10px rgba(85,132,151,1); */
-}
-.lightmuted {
-        background-color: #b7d4d2;
-        color: #000000;
-/*      box-shadow: 0 0 10px rgba(183,212,210,1); */
-}
-.darkmuted {
-        background-color: #11191c;
-        color: #ffffff;
-/*      box-shadow: 0 0 10px rgba(17,25,28,1); */
-}
-
-                </style>
-                <div class="left">
-                    <iframe width="100%" height="450" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/users/233217&amp;color=ff5500&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false"></iframe>
-                </div>
-                <div class="right vibrant">
-                    <h1>remixes <small>(and original tracks too)</small></h1>
-                </div>
-            </section>
-            <section id="code"
-                class="darkmuted"
-                style="background-image:url(image/code.png);background-position:center;background-color: #090e13;">
-                <style scoped>
-/*                    @import url("image/code.png.css");*/
-
-.darkvibrant {
-        background-color: #010e19;
-        color: #ffffff;
-/*      box-shadow: 0 0 10px rgba(1,14,25,1); */
-}
-.darkmuted {
-        background-color: #090e13;
-        color: #ffffff;
-/*      box-shadow: 0 0 10px rgba(9,14,19,1); */
-}
-. {
-        background-color: #0a89f5;
-        color: #ffffff;
-/*      box-shadow: 0 0 10px rgba(10,137,245,1); */
-}
-
-                </style>
-                <div class="left" style="background:rgb(0, 181, 251);color:#fff">
-                    <h1>code</h1>
-                </div>
-                <div class="right">
-                    <caffo-github></caffo-github>
-                </div>
-            </section>
-            <section id="words"
-                class="muted"
-                style="background-image:url(image/pexels-photo-45718.jpg)">
-                <style scoped>
-/*                    @import url("image/pexels-photo-45718.jpg.css");*/
-.lightmuted {
-        background-color: #cfd3bf;
-        color: #000000;
-/*      box-shadow: 0 0 10px rgba(207,211,191,1); */
-}
-.darkmuted {
-        background-color: #8f754a;
-        color: #ffffff;
-/*      box-shadow: 0 0 10px rgba(143,117,74,1); */
-}
-.vibrant {
-        background-color: #b09855;
-        color: #ffffff;
-/*      box-shadow: 0 0 10px rgba(176,152,85,1); */
-}
-.lightvibrant {
-        background-color: #b5a465;
-        color: #000000;
-/*      box-shadow: 0 0 10px rgba(181,164,101,1); */
-}
-.muted {
-        background-color: #a38d5c;
-        color: #ffffff;
-/*      box-shadow: 0 0 10px rgba(163,141,92,1); */
-}
-. {
-        background-color: #5b4e2a;
-        color: #ffffff;
-/*      box-shadow: 0 0 10px rgba(91,78,42,1); */
-}
-
-                </style>
-                <div class="left">
-                    <caffo-blog></caffo-blog>
-                </div>
-                <div class="right vibrant">
-                    <h1>and words <small>(occasionally)</small></h1>
-                </div>
-            </section>
-            <section id="contact">
-                <style scoped>
-                    svg {
-                        width: 100%;
-                        fill: currentColor;
-                        overflow: visible;
-                    }
-                    text {
-                        font-family: inherit;
-                        font-size: 1rem;
-                        font-weight: inherit;
-                        text-anchor: middle;
-                    }
-                    text a,
-                    a text {
-                        cursor: pointer;
-                    }
-                    text a:hover,
-                    a:hover text {
-                        text-decoration: underline;
-                    }
-                    #ft-email,
-                    #ft-me {
-                        fill: currentColor;
-                    }
-                    text:hover #ft-email, #ft-at {
-                        fill: rgba(0,0,0,0.05);
-                    }
-                    text:hover #ft-me,
-                    text:hover #ft-at,
-                    text:hover a, 
-                    a:hover text {
-                        fill: #00b5fb;
-                        opacity: 1;
-                    }
-                    #twitter {
-                        display: block;
-                        width: 50%;
-                        margin: auto;
-                        text-align: center;
-                        position: relative;
-                    }                        
-                    #twitter img {
-                        height: 100%;
-                        position: absolute;
-                        top: 10%;
-                        left: -25%;
-                    }
-                </style>
-                <script defer>
-                    window.addEventListener("DOMContentLoaded", () => {
-                        [].forEach.call(document.querySelectorAll(".fit-text"), (svgElement) => {
-                            var resizeFn = function() {
-                                var textElement = svgElement.querySelector('text'),
-                                w = textElement.offsetWidth || textElement.getComputedTextLength(),
-                                h = textElement.offsetHeight || 24;
-                                svgElement.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
-                            };
-                            resizeFn();
-                            window.addEventListener('resize', resizeFn);
-                        });
-                    });
-                </script>
-                <div style="width:100%;padding:3.3333rem">
-                    <svg class="fit-text">
-                        <text x="50%" y="20"><tspan id="ft-email">email</tspan> <a xlink:href="mailto:me@dayvonjersen.com?subject=hi"><tspan id="ft-me">me</tspan><tspan id="ft-at">@dayvonjersen.com</tspan></a></text>
-                    </svg>
-                    <a id="twitter" href="https://twitter.com/dayvonjersen" target="_blank"><img src="/image/twitter.png">
-                        <svg class="fit-text"><text x="50%" y="20">@dayvonjersen</</text></svg></a>
-                </div>
-            </section>
-        </main>
-
-        <footer class="with-love" title="less than three from new jersey">with <span style='color:#f39'>&lt;3</span> from nj</footer>
-        <script src='/scoped-css-polyfill.js'></script>
+<footer class="with-love" title="less than three from new jersey">with <span style='filter:none!important;color:#f39'>&lt;3</span> from nj</footer>
     </body>
 </html>

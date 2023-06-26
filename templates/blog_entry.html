@@ -1,188 +1,379 @@
 <!doctype html>
 <html>
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <style>
-            @import "/reset.css";
-            @import "/font/fonts.css";
-            @import "/prism.css";
-            @import "/medium-underline.css";
+*, *::after, *::before {
+    box-sizing: border-box;
+}
 
-            ::selection { background-color: #ffef00; color: #333; text-shadow: none; }
-            ::-webkit-selection { background-color: #ffef00; color: #333; text-shadow: none; }
-            ::-moz-selection { background-color: #ffef00; color: #333; text-shadow: none; }
+:root {
+    font-size: 21px;
+    line-height: 1.7;
+}
 
-            h1, h2, h3, h4, h5, h6 {
-                font-family: "tisa-regular";
-                line-height: 1.58;
-            }
-            h1, h2, h3, h4 {
-                letter-spacing: -.6px;
-            }
+body {
+    font-family: "DejaVu Sans Condensed", "Roboto", "Noto Sans", sans-serif;
+    background: #fefefe;
+    color: #444;
+    padding: 1rem;
+    max-width: 42rem;
+    margin: auto;
+}
 
-            body > header > blockquote {
-                font-size: 14px;
-                color: rgba(38, 45, 51, 0.5);
-                margin-top: .5em
-            }
+::selection, a::selection {
+    background: rgba(255,255,0,0.3);
+    color: #000;
+}
 
-            span.tag {
-                color: #f49d00;
-                margin-right: .5em;
-            }
+a::selection {
+    color: #0645ad;
+}
 
-            html, body {
-                height: 100%;
-                margin: 0;
-                padding: 0;
+a { 
+    color: #0645ad; 
+    text-decoration: underline;
+}
 
-                font-family: "freightsans-book";
-                font-size: 22px;
-                line-height: 1.78;
-            }
+a:hover { 
+    color: #06e; 
+    text-decoration: none;
+}
 
-            html {
-                font-size: 1em;
-                padding: 0 1rem;
-            }
+a:active {
+    color:#faa700;
+}
 
-            body {
-                color: #262d33;
-                max-width: 40rem;
-                margin: auto;
-            }
+p {
+    margin: 1rem 0;
+}
 
-            p {margin-bottom: 1em;}
+img {
+    max-width: 100%;
+    max-height: 100%;
+    vertical-align: middle;
+    z-index: 1;
+}
 
-            h1, h2, h3, h4 {
-                margin: 1.414em 0 0.5em;
-                font-weight: inherit;
-                line-height: 1.2;
-            }
-            .blogblog h1,
-            .blogblog h2,
-            .blogblog h3,
-            .blogblog h4 {
-                border-bottom: .05em #D3DAD91A solid;
-            }
+h1, h2, h3, h4, h5, h6 {
+    font-weight: normal;
+    line-height: 1;
+    color: #111;
+}
 
-            h1 {
-                margin-top: 0;
-/*              font-size: 2.441em;*/
-            }
+h4, h5, h6 {
+    font-weight: bold;
+}
 
-            h2 {font-size: 1.953em;}
+h1 {
+    font-size: 2.5rem;
+}
 
-            h3 {font-size: 1.563em;}
+h2 {
+    font-size: 2rem;
+}
 
-            h4 {font-size: 1.25em;}
+h3 {
+    font-size: 1.5rem;
+}
 
-            small {font-size: 0.8em;}
-            ul {
-                list-style-type: circle;
-            }
+h4 {
+    font-size: 1.2rem;
+}
 
-            ol {
-                list-style-type: lower-roman;
-            }
+h5 {
+    font-size: 1rem;
+}
 
-            ul, ol {
-                list-style-position: outside;
-            }
-            li p {
-                margin: 0;
-            }
+h6 {
+    font-size: 0.9rem;
+}
 
-            code, pre {
-                font-family: "operator-book";
-                font-size: 15px;
-                background-color: #eeeeef;
-            }
-            blockquote {
-                padding: 0 0.8333em;
-                margin-left: -0.8333em;
-                border-left: 4px #d1d1d1 solid;
-                background: linear-gradient(90deg, rgba(209, 209, 209, 0.09) 0%, transparent 100%);
-            }
-            hr {
-                border: 0;
-                border-top: 1px #d1d1d1 solid;
-            }
+blockquote {
+    color: #666;
+    margin: 0;
+    padding-left: 3rem;
+    border-left: 0.5rem solid #eee;
+}
 
-            body > header h1, 
-            body > header h2 {
-                margin: 0;
-            }
-            body > header {
-                padding-top: 8vh;
-                margin-bottom: 1.5em;
-            }
-            #blogblog {
-                padding-bottom: 8vh;
-            }
+hr {
+    display: block;
+    height: 2px;
+    border: 0;
+    border-top: 1px solid #aaa;
+    border-bottom: 1px solid #eee;
+    margin: 1rem 0;
+    padding: 0;
+}
 
-            a[href] { color: #72b0eb }
-            a[href]:hover { background-position: 0 2em; }
-            
-            body > footer {
-                font-style: italic;
-                display: flex;
-                justify-content: space-between;
-            }
+pre, code, kbd, samp {
+    background: #444;
+    color: #fefefe;
+    font-family: "Hack", monospace;
+    font-size: 0.98rem;
+    border-radius: 2px;
+}
 
-            figure {
-                width: 100%;
-                max-height: 20em;
-                box-shadow: 0 0 1px;
-            }
-            figure:hover {
-                box-shadow: 0 0 44px -22px;
-            }
-            figure img {
-                width: 100%;
-                max-height: 20em;
-                object-fit: cover;
-                display: block;
-            }
-            figcaption {
-                text-align: center;
-                font-size: 0.6667em;
-                margin-top: .3333em;
-            }
+pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
 
-            a[href].litebox {
-                background: none;
-                color: inherit;
-            }
+:not(pre) > code {
+    padding: 0 0.3333rem;
+}
 
-            .lightbox {
-                display: none;
-                position: fixed;
-                z-index: 999;
-                width: 100%;
-                height: 100%;
-                top: 0;
-                left: 0;
-                background: rgba(0,0,0,0.8) !important;
-            }
+dfn {
+    font-style: italic;
+}
 
-            .lightbox:target {
-                outline: none;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-            }
+ins {
+    background: #ff9;
+    color: #000;
+    text-decoration: none;
+}
+
+mark {
+    background: #ff0;
+    color: #000;
+    font-style: italic;
+    font-weight: bold;
+}
+
+sub, sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+}
+
+sup {
+    top: -0.5em;
+}
+
+sub {
+    bottom: -0.25em;
+}
+
+ul, ol {
+    margin: 1rem 0;
+    padding: 0 0 0 2em;
+}
+
+li p:last-child {
+    margin: 0;
+}
+
+dd {
+    margin: 0 0 0 2rem;
+}
+
+table {
+    border-radius: 5px;
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+}
+
+th {
+    border-bottom: 1px solid black;
+}
+
+td {
+    vertical-align: top;
+}
+
+a:not([href]) {
+    color: inherit;
+    text-decoration: none;
+    position: relative;
+}
+a:not([href])::before {
+    content: '#';
+    position: absolute;
+    left: -1em;
+    pointer-events: none;
+}
+
+h1[id],h2[id],h3[id],h4[id],h5[id],h6[id] {
+    position: relative;
+}
+a.hashbang {
+    position: absolute;
+    left: -6rem;
+    padding-left: 3rem;
+    color: inherit;
+    text-decoration: none;
+    opacity: 0;
+}
+h1:hover a.hashbang,
+h2:hover a.hashbang,
+h3:hover a.hashbang,
+h4:hover a.hashbang,
+h5:hover a.hashbang,
+h6:hover a.hashbang {
+    opacity: 1;
+}
+a.hashbang:hover {
+    text-decoration: underline;
+}
+
+a.active {
+    display: block;
+}
+
+header > h1, #blogmeta {
+    text-align: center;
+}
+#blogmeta a {
+    font-weight: bold;
+}
+#blogmeta a::before {
+    content: "";
+    display: inline-block;
+    vertical-align: text-top;
+    width: 32px;
+    height: 32px;
+    background-size: 24px 24px;
+    background-image: url(/image/awesome.png);
+    background-repeat: no-repeat;
+}
+#blogmeta span::before {
+    content: " • ";
+    color: #ccc;
+}
+#blogmeta .tag {
+    color: #faa700;
+}
+
+footer {
+    background: #ccc;
+    padding: 1em;
+    display: flex;
+    justify-content: space-around;
+    position: relative;
+}
+
+footer > * {
+    max-width: 33.3333%;
+}
+
+footer::before {
+    content: "more words";
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-style: italic;
+    font-size: xx-small;
+}
+
+footer strong {
+    font-size: 2.6667em;
+    vertical-align: sub;
+    float: left;
+}
         </style>
-        <script>
-            function readtime(articleSelector) {
-                let articleElement = document.querySelector(articleSelector);
-                return articleElement.textContent.split(/\W+/).length/260+.5|0 || "&lt;1";
-            }
-let fdate = (date) => {
-    let diff = ( (new Date()).getTime() - date.getTime() ) / 1000;
+                <script>
+let lightbox = {
+    imgElement: null,
+    active: false,
+    toggle: () => {
+        document.documentElement.style.overflow = lightbox.active ? "hidden" : "visible";
 
-    let unit = 'second';
+        if(!lightbox.imgElement) return;
+        
+        let rect = lightbox.imgElement.getBoundingClientRect();
+        if(lightbox.active) {
+            lightbox.imgElement.parentElement.classList.add("active");
+            lightbox.imgElement.parentElement.style.backgroundImage = "url("+lightbox.imgElement.src+")";
+            lightbox.imgElement.parentElement.style.width  = rect.width + "px";
+            lightbox.imgElement.parentElement.style.height = rect.height + "px";
+        } else {
+            lightbox.imgElement.parentElement.classList.remove("active");
+        }
 
-    switch(true) {
+        lightbox.imgElement.style.position  = lightbox.active ? "fixed" : "static";
+        lightbox.imgElement.style.boxShadow = lightbox.active ? "rgba(254,254,254,0.53) 0 0 50vw -6vw, rgba(0,0,0,0.9) 0 0 0 100vh" : "none";
+        rect = lightbox.imgElement.getBoundingClientRect();
+        lightbox.imgElement.style.left = lightbox.active ? ((window.innerWidth  - rect.width )/2)+"px" : 0;
+        lightbox.imgElement.style.top  = lightbox.active ? ((window.innerHeight - rect.height)/2)+"px" : 0;
+    },
+    close: () => {
+        lightbox.active = false;
+        lightbox.toggle();
+    }
+}
+
+let contentloadedCallback = () => {
+    [].forEach.call(document.querySelectorAll("a"), (anchorElement) => {
+        let href = anchorElement.getAttribute("href");
+        if(!!href && href.charAt(0) != "#") {
+            anchorElement.setAttribute("target", "_blank");
+        }
+    });
+    [].forEach.call(document.querySelectorAll("h1,h2,h3,h4,h5,h6"), (hElement) => {
+        hElement.id = hElement.textContent.toLowerCase().replace(/[^a-z0-9_]+/g, '-')
+        hElement.insertAdjacentHTML("afterbegin", '<a href="#'+hElement.id+'" class="hashbang">#</a>')
+    });
+
+    [].forEach.call(document.querySelectorAll("table"), (tableElement) => tableElement.setAttribute("border", "1"));
+    
+    document.documentElement.addEventListener("click", lightbox.close); 
+
+    window.addEventListener("keyup", (e) => {
+        if(!lightbox.active) return;
+        if(e.key === "Escape") {
+            lightbox.close();
+            return;
+        }
+
+        let imgs = document.querySelectorAll("img");
+        if(imgs.length < 2) return;
+
+        let idx  = [].findIndex.call(imgs, (img) => img === lightbox.imgElement);
+
+        switch(e.key) {
+        default: return;
+        case "ArrowUp":  case "ArrowLeft":  idx--; break;
+        case "ArrowDown":case "ArrowRight": idx++; break;
+        }
+
+        if(idx < 0) idx = imgs.length - 1;
+        if(idx >= imgs.length) idx = 0;
+
+        lightbox.close();
+        lightbox.imgElement = imgs[idx];
+        lightbox.active = true;
+        lightbox.toggle();
+    });
+
+    [].forEach.call(document.querySelectorAll("img"), (imgElement) => {
+        let anchorElement = document.createElement("a");
+        anchorElement.setAttribute("href", imgElement.src);
+        anchorElement.setAttribute("target", "_blank");
+        imgElement.parentElement.appendChild(anchorElement)
+        anchorElement.appendChild(imgElement);
+        anchorElement.addEventListener("click", (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            lightbox.imgElement = imgElement;
+            lightbox.active = !lightbox.active;
+            lightbox.toggle();
+        });
+    });
+
+
+    let readtime = (articleSelector) => {
+        let articleElement = document.querySelector(articleSelector);
+        return articleElement.textContent.split(/\W+/).length/260+.5|0 || "&lt;1";
+    };
+
+    let fdate = (date) => {
+        let diff = ( (new Date()).getTime() - date.getTime() ) / 1000;
+
+        let unit = 'second';
+
+        switch(true) {
         case (diff < 15):
             return 'just now!';
         case (diff > 31536000): diff /= 31536000; unit = 'year'; break;
@@ -191,60 +382,42 @@ let fdate = (date) => {
         case (diff > 86400): diff /= 86400; unit = 'day'; break;
         case (diff > 3600): diff /= 3600; unit = 'hour'; break;
         case (diff > 60): diff /= 60; unit = 'minute'; break;
-    }
+        }
 
-    diff |= 0;
-    return `${diff} ${unit}${diff == 1 ? '' : 's'} ago`;
-};
-window.addEventListener("DOMContentLoaded", () => {
+        diff |= 0;
+        return `${diff} ${unit}${diff == 1 ? '' : 's'} ago`;
+    };
 
     let blogdate = document.querySelector("#blogdate");
     blogdate.innerHTML = fdate(new Date(blogdate.textContent.trim()));
-    blogdate.innerHTML += `<small>&ensp;</small>${readtime("#blogblog")} min read`;
+    blogdate.insertAdjacentHTML("afterend", `<span>${readtime("#blogblog")} min read</span>`);
 
-    [].forEach.call(document.querySelectorAll("img"), (img, i) => {
-        img.outerHTML = `
-            <a name="#_${i}"></a>
-            <a href="#img${i}" class="litebox">
-            <figure>
-                <img src="${img.src}" alt="${img.alt}">
-                <figcaption>${img.alt}</figcaption>
-            </figure>
-        </a>
-        <a href="#_${i}" class="lightbox" id="img${i}">
-            <img src="${img.src}" alt="${img.alt}">
-        </a>`;
-    });
-});
-</script>
+};
 
-<title>{{.Title}}</title>
+document.addEventListener("DOMContentLoaded", contentloadedCallback);
+        </script>
+
+    <title>{{.Title}}</title>
+
     </head>
     <body>
         <header>
             <h1>{{.Title}}</h1>
-            <blockquote>
-                <div>by <a href="https://dayvonjersen.com/" style="background:none"><strong>dayvonjersen</strong></a></div>
-                <div>
+            <div id='blogmeta'>
+                <a href="https://dayvonjersen.com/">dayvonjersen</a>
                 {{if .Dateisset}}
-                    <span id='blogdate' title='{{.Date.Format "Monday, January _2 2006 at 3:04PM MST"}}'
-                        >{{.Date.Format "2006-01-02T15:04:05Z07:00" }}</span>
-
+                <span id='blogdate' title='{{.Date.Format "Monday, January _2 2006 at 3:04PM MST"}}'>{{.Date.Format "2006-01-02T15:04:05Z07:00" }}</span>
                 {{end}}
-                </div>
-                <!-- <div> -->
-                <!-- {{range .Tags}}<span class="tag">{{.}}</span>{{end}} -->
-                <!-- </div> -->
-            </blockquote>
+                {{range .Tags}}<span class="tag">#{{.}}</span>{{end}}
+            </div>
         </header>
         <div id='blogblog'>
             {{.Blog}}
         </div>
         <footer>
-            {{if .Previous}}<span>&larr;<a href="{{.Previous.Url}}">{{.Previous.Title}}</a></span>{{end}}
-            <span>&uarr;<a href="/blog">words</a></span>
-            {{if .Next}}<span><a href="{{.Next.Url}}">{{.Next.Title}}</a>&rarr;</span>{{end}}
+            {{if .Previous}}<span><a href="{{.Previous.Url}}"><strong>&larr;</strong>{{.Previous.Title}}</a></span>{{end}}
+            <span><a href="/blog"><strong>&uarr;</strong>index</a></span>
+            {{if .Next}}<span><a href="{{.Next.Url}}">{{.Next.Title}}<strong>&rarr;</strong></a></span>{{end}}
         </footer>
-        <script src="/prism.js"></script>
     </body>
 </html>
