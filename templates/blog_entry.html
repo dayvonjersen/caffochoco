@@ -3,21 +3,29 @@
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <style>
+@font-face {
+	font-family: "IBM Plex Sans";
+	src: url("/font/IBMPlexSans-Regular.woff") format("woff");
+}
+@font-face {
+	font-family: "IBM Plex Mono";
+	src: url("/font/IBMPlexMono-Regular.woff") format("woff");
+}
 *, *::after, *::before {
     box-sizing: border-box;
 }
 
 :root {
-    font-size: 21px;
+    font-size: 19px;
     line-height: 1.7;
 }
 
 body {
-    font-family: "DejaVu Sans Condensed", "Roboto", "Noto Sans", sans-serif;
+    font-family: "IBM Plex Sans", "Roboto", "Noto Sans", sans-serif;
     background: #fefefe;
     color: #444;
     padding: 1rem;
-    max-width: 42rem;
+    max-width: 720px;
     margin: auto;
 }
 
@@ -33,6 +41,7 @@ a::selection {
 a { 
     color: #0645ad; 
     text-decoration: underline;
+    text-decoration-thickness: 2px;
 }
 
 a:hover { 
@@ -46,6 +55,7 @@ a:active {
 
 p {
     margin: 1rem 0;
+    text-align: justify;
 }
 
 img {
@@ -109,18 +119,18 @@ hr {
 pre, code, kbd, samp {
     background: #444;
     color: #fefefe;
-    font-family: "Hack", monospace;
-    font-size: 0.98rem;
-    border-radius: 2px;
+    font-family: "IBM Plex Mono", "Hack", monospace;
+    font-size: 15px;
+    padding: 0 5px;
+    border-radius: 7px;
+    display: inline-block;
 }
 
 pre {
+/*
     white-space: pre-wrap;
     word-wrap: break-word;
-}
-
-:not(pre) > code {
-    padding: 0 0.3333rem;
+*/
 }
 
 dfn {
