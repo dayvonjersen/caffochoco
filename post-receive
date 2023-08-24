@@ -1,0 +1,4 @@
+# put this in blog/.git/hooks
+# don't forget to chmod +x
+
+git --work-tree=/path/to/blog --git-dir=/path/to/blog/.git checkout -f master
